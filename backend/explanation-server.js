@@ -20,6 +20,7 @@ if (!fs.existsSync(STORAGE_DIR)) {
 
 // Health check endpoint
 app.get("/health", (req, res) => {
+  console.log("Health check request received")
   res.json({ status: "ok", message: "Explanation server is running" })
 })
 
@@ -35,11 +36,13 @@ function checkCache(cacheKey) {
   if (fs.existsSync(cachePath)) {
     try {
       const cacheData = JSON.parse(fs.readFileSync(cachePath, "utf8"))
+      console.log(`Cache hit for key: ${cacheKey}`)
       return cacheData
     } catch (error) {
       console.error("Error reading cache:", error)
     }
   }
+  console.log(`Cache miss for key: ${cacheKey}`)
   return null
 }
 
@@ -54,6 +57,7 @@ function saveToCache(cacheKey, explanation) {
         timestamp: Date.now(),
       }),
     )
+    console.log(`Saved explanation to cache with key: ${cacheKey}`)
   } catch (error) {
     console.error("Error saving to cache:", error)
   }
@@ -69,7 +73,12 @@ app.post("/explain-stream", async (req, res) => {
   try {
     const { code, language } = req.body
 
+    console.log(`\n=== Explanation Request ===`)
+    console.log(`Language: ${language}`)
+    console.log(`Code snippet (first 100 chars): ${code.substring(0, 100)}...`)
+
     if (!code || !language) {
+      console.error("Error: Code and language are required")
       res.write(`event: error\ndata: ${JSON.stringify({ error: "Code and language are required" })}\n\n`)
       res.end()
       return
@@ -82,6 +91,7 @@ app.post("/explain-stream", async (req, res) => {
     const cachedExplanation = checkCache(cacheKey)
 
     if (cachedExplanation) {
+      console.log("Using cached explanation")
       // Send metadata event with cache info
       res.write(`event: metadata\ndata: ${JSON.stringify({ fromCache: true })}\n\n`)
 
@@ -94,6 +104,7 @@ app.post("/explain-stream", async (req, res) => {
         await new Promise((resolve) => setTimeout(resolve, 10))
       }
 
+      console.log("Sent cached explanation to client")
       // Send completion event
       res.write(`event: complete\ndata: {}\n\n`)
       res.end()
@@ -104,8 +115,11 @@ app.post("/explain-stream", async (req, res) => {
     res.write(`event: metadata\ndata: ${JSON.stringify({ fromCache: false })}\n\n`)
 
     // Import environment variables
-    const OLLAMA_API_URL = process.env.OLLAMA_API_URL || "http://localhost:11434"
-    const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "llama3"
+    const OLLAMA_API_URL = process.env.OLLAMA_API_URL || "http://127.0.0.1:11434"
+    const OLLAMA_MODEL = process.env.OLLAMA_MODEL || "codestral:latest"
+
+    console.log(`Using Ollama API at: ${OLLAMA_API_URL}`)
+    console.log(`Using model: ${OLLAMA_MODEL}`)
 
     // Prepare the prompt for code explanation
     const prompt = `
@@ -125,6 +139,9 @@ Provide a comprehensive explanation with the following sections:
 Format your response in a clear, educational manner suitable for a student learning programming.
 `
 
+    console.log("Sending request to Ollama API...")
+    console.log(`Prompt (first 150 chars): ${prompt.substring(0, 150)}...`)
+
     // Call Ollama API
     const response = await fetch(`${OLLAMA_API_URL}/api/generate`, {
       method: "POST",
@@ -139,8 +156,13 @@ Format your response in a clear, educational manner suitable for a student learn
     })
 
     if (!response.ok) {
+      const errorText = await response.text()
+      console.error(`Ollama API error: ${response.statusText}`)
+      console.error(`Error details: ${errorText}`)
       throw new Error(`Ollama API error: ${response.statusText}`)
     }
+
+    console.log("Ollama API response received, streaming to client...")
 
     // Process the streaming response
     const reader = response.body.getReader()
@@ -151,6 +173,7 @@ Format your response in a clear, educational manner suitable for a student learn
       const { done, value } = await reader.read()
 
       if (done) {
+        console.log("Stream complete")
         break
       }
 
@@ -165,17 +188,25 @@ Format your response in a clear, educational manner suitable for a student learn
           const parsedLine = JSON.parse(line)
 
           if (parsedLine.response) {
+            // Log the response chunk (first 50 chars)
+            const responseChunk = parsedLine.response
+            console.log(`Response chunk: ${responseChunk.substring(0, 50)}${responseChunk.length > 50 ? "..." : ""}`)
+
             // Send the chunk to the client
-            res.write(`event: data\ndata: ${JSON.stringify({ explanation: parsedLine.response })}\n\n`)
+            res.write(`event: data\ndata: ${JSON.stringify({ explanation: responseChunk })}\n\n`)
 
             // Accumulate the explanation
-            accumulatedExplanation += parsedLine.response
+            accumulatedExplanation += responseChunk
           }
         } catch (error) {
           console.error("Error parsing JSON line:", error)
         }
       }
     }
+
+    console.log("Explanation complete")
+    console.log(`Total explanation length: ${accumulatedExplanation.length} characters`)
+    console.log(`Final explanation (first 200 chars): ${accumulatedExplanation.substring(0, 200)}...`)
 
     // Save to cache
     saveToCache(cacheKey, accumulatedExplanation)
@@ -192,6 +223,10 @@ Format your response in a clear, educational manner suitable for a student learn
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Explanation server running on port ${PORT}`)
+  console.log(`\n=== Explanation Server ===`)
+  console.log(`Server running on port ${PORT}`)
   console.log(`Health check: http://localhost:${PORT}/health`)
-})
+  console.log(`Explanation endpoint: http://localhost:${PORT}/explain-stream`)
+  console.log(`Cache directory: ${STORAGE_DIR}`)
+  console.log(`Ready to receive explanation requests\n`)
+})  
