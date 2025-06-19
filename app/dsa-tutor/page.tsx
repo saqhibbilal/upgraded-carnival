@@ -107,9 +107,11 @@ export default function DSATutorPage() {
     output: false,
   })
 
-  const resetLayout = () => {
+  //reset layout 
+  /*const resetLayout = () => {
     setCollapse({ challenge: false, assistance: false, editor: false, output: false })
   }
+    */
 
   // Add error handler for ResizeObserver errors
   useEffect(() => {
