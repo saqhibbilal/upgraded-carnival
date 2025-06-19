@@ -20,15 +20,13 @@ export function ChallengeDescription({
 }: ChallengeDescriptionProps) {
  // const collapsedHeight = 40;
   return (
-    <div style={{ height: `${challengeHeight}px` }} className="border-b">
-      <div className="border-b bg-muted/30 px-4 py-2 flex items-center h-10 dark:border-cyan-500 dark:neon-border-cyan">
-        <FileText className="h-4 w-4 mr-2 dark:text-cyan-400" />
-        <span className="font-medium dark:neon-text-cyan">Challenge</span>
-      </div>
-<div
-  className="pt-4 pr-4 pl-4 space-y-4 overflow-y-auto"
-  style={{ maxHeight: `${challengeHeight - 40}px`, paddingBottom: '10%' }}
->        
+ <div className="border-b h-full flex flex-col">
+  <div className="border-b bg-muted/30 px-4 py-2 flex items-center h-10 dark:border-cyan-500 dark:neon-border-cyan">
+    <FileText className="h-4 w-4 mr-2 dark:text-cyan-400" />
+    <span className="font-medium dark:neon-text-cyan">Challenge</span>
+  </div>
+  <div className="pt-4 pr-4 pl-4 space-y-4 overflow-y-auto flex-1 pb-10">
+     
           <div>
           <h2 className="text-base md:text-lg font-bold mb-2 dark:neon-text-cyan">
             {currentQuestionIndex + 1}. {currentQuestion.title}
