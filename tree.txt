@@ -1,0 +1,100 @@
+sde-hire/
+├── .next/
+│   ├── cache/
+│   │             
+│   ├── server/             
+│   ├── static/                  
+│   ├── types/               
+│   └── ...                      # Other files
+├── app/
+│   ├── api/
+│   │   └── /route.js         # This file is a Next.js API route that executes user-submitted code and tests it against multiple inputs using the Judge0 API.
+│   ├── dashboard/             # includes component folder and page.tsx file (for the main dashboard)
+│   ├── dsa-tutor/             # includes component folder and page.tsx file(i am showing the whole folder structure because important)
+│   │   └── components/
+│   |   │   └── ai-assistance.tsx
+│   |   │   └── challenge-description.tsx
+│   |   │   └── code-actions.tsx
+│   |   │   └── code-assistance.tsx
+│   |   │   └── code-editor-section.tsx
+│   |   │   └── output-section.tsx
+│   |   │   └── problem-assistance.tsx
+│   |   │   └── problem-header.tsx
+│   │   └── dsa-tutor.css
+│   │   └── languages.ts
+│   │   └── page.tsx
+│   │   └── questions.json
+│   │   └── types.ts
+│   ├── login/                 # includes component folder and page.tsx file
+│   ├── problems/              # includes component folder and page.tsx file
+│   ├── profile/               # includes component folder and page.tsx file
+│   ├── signup/                # includes component folder and page.tsx file
+│   ├── login/                 # includes component folder and page.tsx file
+│   └── global.css             #css file
+│   └── layout.tsx            #root layout file
+│   └── page.tsx              #page file
+├── backend/
+│   └── app/                  #includes some files not that important              
+│   └── explantation-server.js        #includes code for explanation server code which sends SSE to frontend components in dsa-tutor   
+│   └── gen-code-server.js            #includes code for explanation server code which sends SSE to frontend components in dsa-tutor 
+│   └── problem-assistance-server.js   #includes code for explanation server code which sends SSE to frontend components in dsa-tutor   
+│   └── README.md
+│   └── package.json
+├── components/
+│   └── layout /     
+│   │   └── auth-layout.tsx    #this is used in almost all components as a wrapper(but the user can signin or login with any email and password as of now)
+|   |
+│   └── ui/          #these are ui components like accordian and stuff
+|   |
+│   └── theme-provider.tsx
+│   └── theme-toggle.tsx
+├── hooks/
+│   └── use-mobile.tsx    
+│   └── use-toast.ts    
+├── lib/
+│   ├── context/
+│   │   └── auth-context.tsx   #this is imported in auth-layout.tsx
+│   │   └── index.ts
+│   │   └── progress-context.tsx
+│   │   └── providers.tsx
+│   │   └── theme-context.tsx
+│   └── supabase.ts
+│   └── utils.ts
+├── node_modules/
+├── public/
+├── styles/
+│   └── global.css
+├── .env.local
+├── .gitignore
+├── package-lock.json
+├── package.json
+├── package.jsonnext.config.mjs
+├── tailwind.config.ts
+├── tsconfig.json
+└── pnpm-lock.yaml
+   
+
+supabase : 
+mail = unokhan99@gmail.com
+password = SdeH!re123
+
+DB password :
+SdeH!re123
+
+Organization:
+Sentiantal
+
+Project Name:
+SDEHire
+
+project URL : https://fbjzneyzqmemdytyutht.supabase.co
+anon public key : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZianpuZXl6cW1lbWR5dHl1dGh0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA0Mjg2MzUsImV4cCI6MjA2NjAwNDYzNX0.cqKGgI_LcL5MZ1Jza8gh_PpIHiYw0qChj0beRowxDkc
+
+
+
+│   ├── api/
+│   │   └── sse/route.js         # SSE endpoint
+│   ├── (marketing)/             # Marketing pages group
+│   ├── (app)/                   # App pages group (protected routes)
+│   ├── layout.js                # Root layout
+│   └── ...                      # Other routes
