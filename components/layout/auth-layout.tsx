@@ -1,9 +1,6 @@
 "use client"
-//new code
-import { useRouter } from "next/navigation"
-//new code
-//const { user, logout } = useAuth()
 
+import { useRouter } from "next/navigation"
 import type { ReactNode } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"

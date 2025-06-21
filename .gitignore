@@ -25,3 +25,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Ignore generated tree structure file
+tree.txt
+
+# Ignore local environment variables file
+.env.local
