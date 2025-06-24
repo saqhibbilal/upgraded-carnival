@@ -171,7 +171,7 @@ useEffect(() => {
                             {/* modified code
                     {state.user?.name || "Account"} 
                     */}
-                    {user?.email || "Account"}
+                    {user?.user_metadata?.full_name || user?.email || "Account"}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
