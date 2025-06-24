@@ -69,16 +69,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (email: string, password: string) => {
   setLoading(true)
+  
+  const { error: signInError } = await supabase.auth.signInWithPassword({ email, password })
 
-  const { error } = await supabase.auth.signInWithPassword({ email, password })
-
-  if (!error) {
+  if (!signInError) {
     const { data } = await supabase.auth.getUser()
     const currentUser = data?.user
 
-    setUser(currentUser || null)
-
     if (currentUser) {
+      setUser(currentUser)
+
+      // Check if user exists in 'users' table
       const { data: existingUser, error: fetchError } = await supabase
         .from('users')
         .select('id')
@@ -86,24 +87,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         .single()
 
       if (!existingUser && !fetchError) {
-        const name =
-          currentUser.user_metadata?.name ||
-          currentUser.user_metadata?.full_name ||
-          currentUser.email
-
-        const { error: insertError } = await supabase.from('users').insert([
+        // Insert user if not found
+        await supabase.from('users').insert([
           {
             id: currentUser.id,
-            name,
             email: currentUser.email,
+            name: currentUser.user_metadata.full_name,
           },
         ])
-
-        if (insertError) {
-          console.error('❌ Error inserting user into users table:', insertError)
-        } else {
-          console.log('✅ User successfully inserted into users table')
-        }
       }
     }
 
@@ -111,7 +102,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   setLoading(false)
-  return error
+
+  return signInError
 }
 
 

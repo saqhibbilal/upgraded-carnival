@@ -6,8 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Alert, AlertDescription } from '@/components/ui/alert'
-import { useAuth } from '@/lib/context/auth-context'
+import { supabase } from '@/lib/supabase'
 
 export function SignupForm() {
   const [firstName, setFirstName] = useState('')
@@ -16,47 +15,35 @@ export function SignupForm() {
   const [password, setPassword] = useState('')
   const [agreedToTerms, setAgreedToTerms] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
   const [loading, setLoading] = useState(false)
-
-  const { signup } = useAuth()
+  const [success, setSuccess] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
-    setSuccess(null)
     setLoading(true)
 
-    const fullName = `${firstName} ${lastName}`
-    const result = await signup(fullName, email, password)
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: `${firstName} ${lastName}`,
+        },
+      },
+    })
 
     setLoading(false)
 
-    if (result) {
-      setError(result.message || 'Failed to create account')
+    if (error) {
+      setError(error.message)
     } else {
-      setSuccess('✅ Account created! Please check your email to verify before logging in.')
-      setFirstName('')
-      setLastName('')
-      setEmail('')
-      setPassword('')
-      setAgreedToTerms(false)
+      setSuccess(true)
     }
   }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
-      {success && (
-        <Alert variant="default">
-          <AlertDescription>{success}</AlertDescription>
-        </Alert>
-      )}
-      {error && (
-        <Alert variant="destructive">
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      )}
-
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <Label htmlFor="first-name">First name</Label>
@@ -92,13 +79,7 @@ export function SignupForm() {
       </div>
       <div className="space-y-2">
         <Label htmlFor="password">Password</Label>
-        <Input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
         <p className="text-xs text-muted-foreground">
           Must be at least 8 characters and include a number and a special character
         </p>
@@ -121,6 +102,9 @@ export function SignupForm() {
           </Link>
         </Label>
       </div>
+
+      {error && <p className="text-red-500 text-sm">{error}</p>}
+      {success && <p className="text-green-600 text-sm">Check your email to verify your account before logging in!</p>}
 
       <Button className="w-full" size="lg" type="submit" disabled={loading}>
         {loading ? 'Creating account...' : 'Create account'}
