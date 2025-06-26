@@ -92,9 +92,4 @@ anon public key : eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsI
 
 
 
-│   ├── api/
-│   │   └── sse/route.js         # SSE endpoint
-│   ├── (marketing)/             # Marketing pages group
-│   ├── (app)/                   # App pages group (protected routes)
-│   ├── layout.js                # Root layout
-│   └── ...                      # Other routes
+ 
