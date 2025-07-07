@@ -9,6 +9,27 @@ export interface ProblemAssistance {
   streamingText?: string
 }
 
+
+export interface Question {
+  id: number
+  title: string
+  difficulty: string
+  description: string // ✅ This maps to your question text (from Supabase)
+  input_format: string
+  output_format: string
+  constraints: string
+  hint: string
+  tags: string[] | null
+  test_cases: {
+    sample_input: string
+    sample_output: string
+    hidden_inputs: string[]
+    hidden_outputs: string[]
+  }
+}
+
+
+/*
 // Keep other types as they are
 export interface Question {
   id: number
@@ -25,6 +46,7 @@ export interface Question {
   hidden_outputs: string[]
   tags: string[]
 }
+*/
 
 export interface ExecutionResult {
   stdout: string | null
