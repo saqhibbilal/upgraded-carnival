@@ -1,3 +1,5 @@
+
+
 import { BookOpen, Award, Clock } from "lucide-react"
 import { StatsCard } from "./stats-card"
 import { useProgress } from "@/lib/context/progress-context"
