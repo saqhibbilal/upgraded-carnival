@@ -14,6 +14,15 @@ export function FeaturesSection() {
       />
 
       <FeatureCard
+        title="Technical Interview Simulator"
+        description="Practice for your technical interviews with our interactive interview simulator"
+        content="Our technical interview simulator provides a realistic interview experience, including timed questions and feedback. Get real-time feedback and hints as you code."
+        icon={<Code className="h-4 w-4" />}
+        linkHref="/technical-interview"
+        linkText="Start Interview"
+      />
+
+      <FeatureCard
         title="Problem List"
         description="Browse our collection of coding problems"
         content="Explore our curated collection of coding problems, ranging from easy to hard difficulty. Filter by topic, difficulty, or company to find the perfect problems for your practice."
