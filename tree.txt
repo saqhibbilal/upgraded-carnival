@@ -46,6 +46,11 @@ sde-hire/
 │   |   │   └── profile-sidebar.tsx
 │   |   │   └── progress-tab.tsx
 │   │   └── page.tsx
+│   ├── register/               # includes component folder and page.tsx file
+│   │   └── components/
+│   |   │   └── register-guard.tsx
+│   |   │   └── registration-form.tsx
+│   │   └── page.tsx
 │   ├── signup/                # includes component folder and page.tsx file
 │   │   └── components/
 │   |   │   └── back-button.tsx
@@ -88,6 +93,7 @@ sde-hire/
 │   └── supabase.ts    # Supabase client (browser + server)
 │   └── utils.ts
 ├── node_modules/
+├── middelware.ts
 ├── public/
 ├── styles/
 │   └── global.css
@@ -95,7 +101,7 @@ sde-hire/
 ├── .gitignore
 ├── package-lock.json
 ├── package.json
-├── package.jsonnext.config.mjs
+├── postcss.config.mjs
 ├── tailwind.config.ts
 ├── tsconfig.json
 └── pnpm-lock.yaml
