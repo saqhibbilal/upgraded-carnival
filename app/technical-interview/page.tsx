@@ -26,6 +26,8 @@ import {
   Zap,
   Crown,
   Volume2,
+  AlertCircle,
+  Lightbulb,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { VoiceAnimation } from "@/components/voice-animation"
@@ -551,14 +553,14 @@ export default function TechnicalInterviewSimulator() {
 
   const handleNextQuestion = useCallback(() => {
     // Save current answer - ALWAYS save, even if empty
-    const currentQuestionTimer = getTimerDuration(questions[currentQuestion].type)
-    const newAnswer: UserAnswer = {
-      questionId: questions[currentQuestion].id,
-      questionText: questions[currentQuestion].question,
-      questionType: questions[currentQuestion].type,
+      const currentQuestionTimer = getTimerDuration(questions[currentQuestion].type)
+      const newAnswer: UserAnswer = {
+        questionId: questions[currentQuestion].id,
+        questionText: questions[currentQuestion].question,
+        questionType: questions[currentQuestion].type,
       answer: currentAnswer.trim() || '', // Save empty string if no answer
-      timeSpent: currentQuestionTimer - timer,
-    }
+        timeSpent: currentQuestionTimer - timer,
+      }
     
     // Check if this is the last question
     const isLastQuestion = currentQuestion === questions.length - 1;
@@ -601,7 +603,7 @@ export default function TechnicalInterviewSimulator() {
     }
 
     console.log(`📊 Submitting ${answers.length} answers for ${questions.length} questions`);
-    
+
     setIsSubmittingResponses(true);
     setHasSubmitted(true);
     try {
@@ -662,8 +664,17 @@ export default function TechnicalInterviewSimulator() {
         console.log('🎯 Setting evaluation result:', result.evaluation);
         console.log('🔍 Evaluation structure:', JSON.stringify(result.evaluation, null, 2));
         setEvaluationResult(result.evaluation);
+        
+        // If it's an instant evaluation (free user), show success message
+        if (result.isInstantEvaluation) {
+          console.log('✅ Instant MCQ evaluation completed for free user');
+        }
       } else {
         console.log('⚠️ No evaluation in result - will use mock data');
+        // For pro users, show that evaluation is in progress
+        if (isPro) {
+          console.log('⏳ Pro user evaluation queued for AI processing');
+        }
       }
       
       if (result.warning) {
@@ -979,7 +990,134 @@ export default function TechnicalInterviewSimulator() {
                           <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-blue-600"></div>
                           <span className="text-slate-600 dark:text-slate-400">Submitting your responses...</span>
                         </div>
+                      ) : evaluationResult ? (
+                        /* Real Evaluation Results */
+                        <div className="space-y-6">
+                          {/* Score Display */}
+                          <div className="text-center">
+                            <div className="text-4xl font-bold text-green-600 mb-2">
+                              {evaluationResult.overallScore}%
+                            </div>
+                            <div className="flex items-center justify-center gap-2 mb-4">
+                              <Badge variant={evaluationResult.passFailStatus === 'PASS' ? 'default' : 'destructive'} 
+                                     className={evaluationResult.passFailStatus === 'PASS' 
+                                       ? 'bg-gradient-to-r from-green-600 to-blue-600' 
+                                       : 'bg-gradient-to-r from-red-600 to-orange-600'}>
+                                {evaluationResult.passFailStatus === 'PASS' ? (
+                                  <>
+                                    <CheckCircle className="w-3 h-3 mr-1" />
+                                    PASSED
+                                  </>
+                                ) : (
+                                  <>
+                                    <XCircle className="w-3 h-3 mr-1" />
+                                    NEEDS IMPROVEMENT
+                                  </>
+                                )}
+                              </Badge>
+                            </div>
+                            <p className="text-slate-600 dark:text-slate-400">
+                              {evaluationResult.correctAnswers} out of {evaluationResult.totalQuestions} questions correct
+                            </p>
+                          </div>
+
+                          {/* MCQ Analysis */}
+                          {evaluationResult.mcqAnalysis && (
+                            <div className="space-y-4">
+                              <h3 className="text-lg font-semibold text-center">Question Analysis</h3>
+                              <div className="space-y-3">
+                                {evaluationResult.mcqAnalysis.map((question: any, index: number) => (
+                                  <div key={index} className="p-4 border rounded-lg bg-slate-50 dark:bg-slate-800">
+                                    <div className="flex items-start justify-between mb-2">
+                                      <span className="font-medium text-sm">Question {index + 1}</span>
+                                      <Badge variant={question.isCorrect ? 'default' : 'destructive'} 
+                                             className={question.isCorrect ? 'bg-green-600' : 'bg-red-600'}>
+                                        {question.isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                                      </Badge>
+                                    </div>
+                                    <p className="text-sm text-slate-700 dark:text-slate-300 mb-2">
+                                      {question.questionText}
+                                    </p>
+                                    <div className="text-xs text-slate-600 dark:text-slate-400">
+                                      <span className="font-medium">Your answer:</span> {question.userAnswer || 'No answer'}
+                                    </div>
+                                    {!question.isCorrect && (
+                                      <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                                        <span className="font-medium">Correct answer:</span> {question.correctAnswer}
+                                      </div>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Feedback */}
+                          <div className="space-y-4">
+                            {evaluationResult.strengths && evaluationResult.strengths.length > 0 && (
+                              <div>
+                                <h3 className="text-lg font-semibold text-green-700 dark:text-green-400 mb-2">Strengths</h3>
+                                <ul className="space-y-1">
+                                  {evaluationResult.strengths.map((strength: string, index: number) => (
+                                    <li key={index} className="flex items-center gap-2 text-sm">
+                                      <CheckCircle className="w-4 h-4 text-green-600" />
+                                      {strength}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+
+                            {evaluationResult.weaknesses && evaluationResult.weaknesses.length > 0 && (
+                              <div>
+                                <h3 className="text-lg font-semibold text-orange-700 dark:text-orange-400 mb-2">Areas for Improvement</h3>
+                                <ul className="space-y-1">
+                                  {evaluationResult.weaknesses.map((weakness: string, index: number) => (
+                                    <li key={index} className="flex items-center gap-2 text-sm">
+                                      <AlertCircle className="w-4 h-4 text-orange-600" />
+                                      {weakness}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+
+                            {evaluationResult.recommendations && evaluationResult.recommendations.length > 0 && (
+                              <div>
+                                <h3 className="text-lg font-semibold text-blue-700 dark:text-blue-400 mb-2">Recommendations</h3>
+                                <ul className="space-y-1">
+                                  {evaluationResult.recommendations.map((rec: string, index: number) => (
+                                    <li key={index} className="flex items-center gap-2 text-sm">
+                                      <Lightbulb className="w-4 h-4 text-blue-600" />
+                                      {rec}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ) : isPro ? (
+                        /* Pro User - Evaluation in Progress */
+                        <div className="space-y-4">
+                          <div className="text-4xl font-bold text-blue-600 mb-2">
+                            🎉 Interview Complete!
+                          </div>
+                          <div className="flex items-center justify-center gap-2">
+                            <Badge variant="default" className="bg-gradient-to-r from-blue-600 to-purple-600">
+                              <Clock className="w-3 h-3 mr-1" />
+                              AI Evaluation in Progress
+                            </Badge>
+                          </div>
+                          <p className="text-slate-600 dark:text-slate-400 text-lg">
+                            Your responses are being evaluated by AI. Results will be available in your dashboard soon.
+                          </p>
+                          <div className="text-sm text-slate-500 dark:text-slate-400">
+                            {userAnswers.length} questions answered • {techStack} • Pro User
+                          </div>
+                        </div>
                       ) : (
+                        /* Fallback for any issues */
                         <div className="space-y-4">
                           <div className="text-4xl font-bold text-green-600 mb-2">
                             🎉 Interview Complete!
@@ -991,7 +1129,7 @@ export default function TechnicalInterviewSimulator() {
                             </Badge>
                           </div>
                           <p className="text-slate-600 dark:text-slate-400 text-lg">
-                            Your interview scores are being evaluated and will be reflected in the dashboard soon. Good job!
+                            Your interview has been completed successfully.
                           </p>
                           <div className="text-sm text-slate-500 dark:text-slate-400">
                             {userAnswers.length} questions answered • {techStack} • {isPro ? 'Pro User' : 'Free User'}
@@ -1105,14 +1243,18 @@ export default function TechnicalInterviewSimulator() {
 
                     {currentQ?.type === "mcq" && currentQ.options && (
                       <RadioGroup value={currentAnswer} onValueChange={setCurrentAnswer}>
-                        {currentQ.options.map((option, index) => (
-                          <div key={index} className="flex items-center space-x-2">
-                            <RadioGroupItem value={index.toString()} id={`option-${index}`} />
-                            <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
-                              {option}
-                            </Label>
-                          </div>
-                        ))}
+                        {currentQ.options.map((option, index) => {
+                          // Convert index to letter (0->A, 1->B, 2->C, 3->D)
+                          const letterValue = String.fromCharCode(65 + index); // 65 is ASCII for 'A'
+                          return (
+                            <div key={index} className="flex items-center space-x-2">
+                              <RadioGroupItem value={letterValue} id={`option-${index}`} />
+                              <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
+                                {option}
+                              </Label>
+                            </div>
+                          );
+                        })}
                       </RadioGroup>
                     )}
 

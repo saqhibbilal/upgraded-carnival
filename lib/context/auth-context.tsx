@@ -11,6 +11,7 @@ type AuthContextType = {
   isRegistered: boolean
   login: (email: string, password: string) => Promise<any>
   logout: () => Promise<void>
+  refreshUser: () => Promise<void> // Add method to refresh user data
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -42,26 +43,72 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  // Get authenticated user data using getUser() instead of getSession()
+  const getAuthenticatedUser = async () => {
+    try {
+      const { data, error } = await supabase.auth.getUser()
+      
+      if (error) {
+        console.error('Error getting authenticated user:', error)
+        return null
+      }
+      
+      if (data?.user) {
+        console.log('✅ Authenticated user found:', data.user.id)
+        return data.user
+      }
+      
+      return null
+    } catch (error) {
+      console.error('Exception getting authenticated user:', error)
+      return null
+    }
+  }
+
+  // Refresh user data - can be called when needed
+  const refreshUser = async () => {
+    const authenticatedUser = await getAuthenticatedUser()
+    if (authenticatedUser) {
+      setUser(authenticatedUser)
+      const registered = await checkRegistrationStatus(authenticatedUser.id)
+      setIsRegistered(registered)
+    } else {
+      setUser(null)
+      setIsRegistered(false)
+    }
+  }
+
   // Load session on mount
   useEffect(() => {
-    const getSession = async () => {
-      const { data, error } = await supabase.auth.getUser()
-      if (data?.user) {
-        setUser(data.user)
-        const registered = await checkRegistrationStatus(data.user.id)
+    const initializeAuth = async () => {
+      setLoading(true)
+      
+      // Get authenticated user on mount
+      const authenticatedUser = await getAuthenticatedUser()
+      if (authenticatedUser) {
+        setUser(authenticatedUser)
+        const registered = await checkRegistrationStatus(authenticatedUser.id)
         setIsRegistered(registered)
       }
+      
       setLoading(false)
     }
 
-    getSession()
+    initializeAuth()
 
-    const { data: listener } = supabase.auth.onAuthStateChange(async (_event, session) => {
-      if (session?.user) {
-        setUser(session.user)
-        const registered = await checkRegistrationStatus(session.user.id)
-        setIsRegistered(registered)
-      } else {
+    // Listen for auth state changes but always verify with getUser()
+    const { data: listener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('🔄 Auth state change:', event, session?.user?.id)
+      
+      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+        // Always get fresh authenticated user data
+        const authenticatedUser = await getAuthenticatedUser()
+        if (authenticatedUser) {
+          setUser(authenticatedUser)
+          const registered = await checkRegistrationStatus(authenticatedUser.id)
+          setIsRegistered(registered)
+        }
+      } else if (event === 'SIGNED_OUT') {
         setUser(null)
         setIsRegistered(false)
       }
@@ -77,10 +124,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (!error) {
-      const { data } = await supabase.auth.getUser()
-      if (data?.user) {
-        setUser(data.user)
-        const registered = await checkRegistrationStatus(data.user.id)
+      // Get fresh authenticated user data after login
+      const authenticatedUser = await getAuthenticatedUser()
+      if (authenticatedUser) {
+        setUser(authenticatedUser)
+        const registered = await checkRegistrationStatus(authenticatedUser.id)
         setIsRegistered(registered)
         
         // Redirect based on registration status
@@ -93,7 +141,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     setLoading(false)
-    return error // ← send it back so form can show it
+    return error
   }
 
   const logout = async () => {
@@ -104,7 +152,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, isRegistered, login, logout }}>
+    <AuthContext.Provider value={{ user, loading, isRegistered, login, logout, refreshUser }}>
       {children}
     </AuthContext.Provider>
   )
@@ -113,7 +161,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 export const useAuth = () => {
   const context = useContext(AuthContext)
   if (!context) {
-    // This will clearly throw where the issue is happening
     throw new Error(
       "❌ useAuth() must be used within an <AuthProvider>. Check if the component using it is a client component and wrapped correctly."
     )

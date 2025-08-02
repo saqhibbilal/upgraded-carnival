@@ -629,3 +629,6 @@ export function useProgress() {
   return context
 }
  */
+
+
+ node scripts/process-mistral-queue.js
