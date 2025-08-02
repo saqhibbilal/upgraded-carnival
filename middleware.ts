@@ -57,8 +57,8 @@ export async function middleware(req: NextRequest) {
 
   // Refresh session if expired - required for Server Components
   const {
-    data: { session },
-  } = await supabase.auth.getSession()
+    data: { user },
+  } = await supabase.auth.getUser()
 
   const { pathname } = req.nextUrl
 
@@ -67,12 +67,12 @@ export async function middleware(req: NextRequest) {
   const isPublicRoute = publicRoutes.includes(pathname)
 
   // If user is not authenticated and trying to access protected route
-  if (!session && !isPublicRoute) {
+  if (!user && !isPublicRoute) {
     return NextResponse.redirect(new URL('/login', req.url))
   }
 
   // If user is authenticated
-  if (session) {
+  if (user) {
     // If trying to access login/signup pages, redirect to dashboard
     if (pathname === '/login' || pathname === '/signup') {
       return NextResponse.redirect(new URL('/dashboard', req.url))
@@ -84,7 +84,7 @@ export async function middleware(req: NextRequest) {
         const { data: userData } = await supabase
           .from('users')
           .select('is_registered')
-          .eq('id', session.user.id)
+          .eq('id', user.id)
           .single()
 
         // If user is not registered and not on register page, redirect to register
