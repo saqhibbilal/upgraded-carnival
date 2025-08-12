@@ -154,28 +154,48 @@ export async function POST(request: Request) {
 
     // If pro user, enqueue for AI evaluation
     if (isPro) {
-      // Filter out MCQ questions and prepare long/short answers for AI evaluation
-      const longShortAnswers = responses
-        .filter((resp: any) => resp.questionType !== 'mcq')
-        .map((resp: any) => ({
+      console.log('🤖 Enqueuing pro user responses for AI evaluation');
+      
+      // Include ALL questions (MCQ + short + long) for complete evaluation
+      // MCQ options are now included in the response data
+      const allQuestionsForEvaluation = responses.map((resp: any) => {
+        const baseQuestion = {
           questionId: resp.questionId,
           questionText: resp.questionText,
           questionType: resp.questionType,
           userAnswer: resp.answer,
           timeSpent: resp.timeSpent || 0
-        }));
+        };
+
+        // For MCQ questions, include the options that are now in the response
+        if (resp.questionType === 'mcq') {
+          return {
+            ...baseQuestion,
+            options: resp.options || [],
+            option_a: resp.option_a,
+            option_b: resp.option_b,
+            option_c: resp.option_c,
+            option_d: resp.option_d
+          };
+        }
+
+        return baseQuestion;
+      });
+
+      console.log(`📊 Enqueuing ${allQuestionsForEvaluation.length} questions (${allQuestionsForEvaluation.filter(q => q.questionType === 'mcq').length} MCQ, ${allQuestionsForEvaluation.filter(q => q.questionType !== 'mcq').length} short/long)`);
 
       const { error: queueError } = await supabase.from('mistral_queue').insert({
         session_id: sessionId,
         tech_stack: techStack,
-        long_short_answers: longShortAnswers, // Required field
+        long_short_answers: allQuestionsForEvaluation, // Now contains ALL questions with MCQ options
         status: 'pending',
         enqueued_at: new Date().toISOString(),
       });
       if (queueError) {
-        console.error('Queue error:', queueError);
+        console.error('❌ Queue error:', queueError);
         return NextResponse.json({ error: queueError.message }, { status: 500 });
       }
+      console.log('✅ Pro user responses enqueued for AI evaluation');
     }
 
     return NextResponse.json({ success: true, inserted: rows.length });

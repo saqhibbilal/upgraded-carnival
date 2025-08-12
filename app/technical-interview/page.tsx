@@ -28,6 +28,7 @@ import {
   Volume2,
   AlertCircle,
   Lightbulb,
+  Download,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { VoiceAnimation } from "@/components/voice-animation"
@@ -35,6 +36,8 @@ import { VoiceAnimation } from "@/components/voice-animation"
 // import ReactTTS from "react-tts"
 import mammoth from "mammoth";
 import { Document, Packer } from "docx";
+import jsPDF from 'jspdf'
+import html2canvas from 'html2canvas'
 
 // Types
 interface Question {
@@ -53,6 +56,12 @@ interface UserAnswer {
   questionType: "mcq" | "short" | "long"
   answer: string
   timeSpent: number
+  // Add MCQ options for proper evaluation
+  options?: string[]
+  option_a?: string
+  option_b?: string
+  option_c?: string
+  option_d?: string
 }
 
 interface MockFeedback {
@@ -229,6 +238,9 @@ export default function TechnicalInterviewSimulator() {
   const [isSubmittingResponses, setIsSubmittingResponses] = useState(false)
   const [hasSubmitted, setHasSubmitted] = useState(false)
   const [evaluationResult, setEvaluationResult] = useState<any>(null)
+  const [currentSessionId, setCurrentSessionId] = useState<string | null>(null)
+  const [isPollingResults, setIsPollingResults] = useState(false)
+  const [evaluationStatus, setEvaluationStatus] = useState<'processing' | 'completed' | 'error'>('processing')
 
   // Timer Effect
   useEffect(() => {
@@ -554,13 +566,25 @@ export default function TechnicalInterviewSimulator() {
   const handleNextQuestion = useCallback(() => {
     // Save current answer - ALWAYS save, even if empty
       const currentQuestionTimer = getTimerDuration(questions[currentQuestion].type)
+    const currentQ = questions[currentQuestion];
+    
       const newAnswer: UserAnswer = {
-        questionId: questions[currentQuestion].id,
-        questionText: questions[currentQuestion].question,
-        questionType: questions[currentQuestion].type,
+      questionId: currentQ.id,
+      questionText: currentQ.question,
+      questionType: currentQ.type,
       answer: currentAnswer.trim() || '', // Save empty string if no answer
         timeSpent: currentQuestionTimer - timer,
       }
+    
+    // Add MCQ options if this is an MCQ question
+    if (currentQ.type === 'mcq' && currentQ.options) {
+      newAnswer.options = currentQ.options;
+      // Also add individual options for backend compatibility
+      if (currentQ.options.length >= 1) newAnswer.option_a = currentQ.options[0];
+      if (currentQ.options.length >= 2) newAnswer.option_b = currentQ.options[1];
+      if (currentQ.options.length >= 3) newAnswer.option_c = currentQ.options[2];
+      if (currentQ.options.length >= 4) newAnswer.option_d = currentQ.options[3];
+    }
     
     // Check if this is the last question
     const isLastQuestion = currentQuestion === questions.length - 1;
@@ -591,6 +615,67 @@ export default function TechnicalInterviewSimulator() {
     }
   }, [currentAnswer, currentQuestion, questions, timer])
 
+  // Polling function to check for results
+  const pollForResults = useCallback(async (sessionId: string) => {
+    try {
+      console.log(`🔄 Polling for results: ${sessionId}`);
+      const response = await fetch(`/api/results/${sessionId}`);
+      
+      if (!response.ok) {
+        console.log('⚠️ Results not ready yet');
+        return false;
+      }
+      
+      const data = await response.json();
+      console.log('📊 Poll result:', data);
+      
+      if (data.status === 'completed' && data.evaluation) {
+        console.log('✅ Results found! Setting evaluation result');
+        setEvaluationResult(data.evaluation);
+        setEvaluationStatus('completed');
+        setIsPollingResults(false);
+        return true;
+      } else if (data.status === 'processing') {
+        console.log('⏳ Still processing...');
+        return false;
+      } else {
+        console.log('❌ Evaluation failed');
+        setEvaluationStatus('error');
+        setIsPollingResults(false);
+        return true;
+      }
+    } catch (error) {
+      console.error('❌ Error polling for results:', error);
+      return false;
+    }
+  }, []);
+
+  // Start polling for pro users
+  const startPolling = useCallback((sessionId: string) => {
+    if (!isPro) return;
+    
+    console.log('🔄 Starting result polling for pro user');
+    setIsPollingResults(true);
+    setEvaluationStatus('processing');
+    
+    const pollInterval = setInterval(async () => {
+      const completed = await pollForResults(sessionId);
+      if (completed) {
+        clearInterval(pollInterval);
+      }
+    }, 10000); // Poll every 10 seconds
+    
+    // Clear interval after 5 minutes to avoid infinite polling
+    setTimeout(() => {
+      clearInterval(pollInterval);
+      if (isPollingResults) {
+        setIsPollingResults(false);
+        setEvaluationStatus('error');
+        console.log('⏰ Polling timeout after 5 minutes - please check manually');
+      }
+    }, 300000); // 5 minutes
+  }, [isPro, pollForResults, isPollingResults]);
+
   const submitResponsesToAPI = async (answersToSubmit?: UserAnswer[]) => {
     const answers = answersToSubmit || userAnswers;
     
@@ -608,6 +693,10 @@ export default function TechnicalInterviewSimulator() {
     setHasSubmitted(true);
     try {
       const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      // Store sessionId for polling results
+      setCurrentSessionId(sessionId);
+      localStorage.setItem('currentSessionId', sessionId);
       
       const requestData = {
         sessionId,
@@ -664,16 +753,18 @@ export default function TechnicalInterviewSimulator() {
         console.log('🎯 Setting evaluation result:', result.evaluation);
         console.log('🔍 Evaluation structure:', JSON.stringify(result.evaluation, null, 2));
         setEvaluationResult(result.evaluation);
+        setEvaluationStatus('completed');
         
         // If it's an instant evaluation (free user), show success message
         if (result.isInstantEvaluation) {
           console.log('✅ Instant MCQ evaluation completed for free user');
         }
       } else {
-        console.log('⚠️ No evaluation in result - will use mock data');
-        // For pro users, show that evaluation is in progress
+        console.log('⚠️ No evaluation in result');
+        // For pro users, start polling for results
         if (isPro) {
-          console.log('⏳ Pro user evaluation queued for AI processing');
+          console.log('⏳ Pro user evaluation queued for AI processing - starting polling');
+          startPolling(sessionId);
         }
       }
       
@@ -699,6 +790,10 @@ export default function TechnicalInterviewSimulator() {
     setIsInterviewStarted(false)
     setEvaluationResult(null)
     setHasSubmitted(false)
+    setCurrentSessionId(null)
+    setIsPollingResults(false)
+    setEvaluationStatus('processing')
+    localStorage.removeItem('currentSessionId')
   }
 
   // Restore toggleSpeech function, ensure it only runs on client
@@ -730,6 +825,140 @@ export default function TechnicalInterviewSimulator() {
       utterance.onend = () => setIsSpeaking(false);
       utterance.onerror = () => setIsSpeaking(false);
       window.speechSynthesis.speak(utterance);
+    }
+  };
+
+  // PDF Download function for evaluation results
+  const downloadPDF = async () => {
+    if (!evaluationResult) return;
+    
+    try {
+      // Create a temporary div to render the report content
+      const reportDiv = document.createElement('div');
+      reportDiv.style.width = '800px';
+      reportDiv.style.padding = '40px';
+      reportDiv.style.backgroundColor = 'white';
+      reportDiv.style.color = 'black';
+      reportDiv.style.fontFamily = 'Arial, sans-serif';
+      reportDiv.style.position = 'absolute';
+      reportDiv.style.left = '-9999px';
+      reportDiv.style.top = '0';
+      
+      // Generate the report HTML
+      reportDiv.innerHTML = `
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h1 style="color: #1e40af; font-size: 28px; margin-bottom: 10px;">Technical Interview Report</h1>
+          <p style="color: #6b7280; font-size: 16px;">${techStack} • Pro User Evaluation</p>
+          <p style="color: #6b7280; font-size: 14px;">Generated on ${new Date().toLocaleDateString()}</p>
+        </div>
+        
+        <div style="margin-bottom: 30px; text-align: center;">
+          <div style="font-size: 48px; font-weight: bold; color: ${evaluationResult.overallScore >= 60 ? '#059669' : '#dc2626'}; margin-bottom: 10px;">
+            ${evaluationResult.overallScore}%
+          </div>
+          <div style="font-size: 18px; font-weight: bold; color: ${evaluationResult.passFailStatus === 'PASS' ? '#059669' : '#dc2626'}; margin-bottom: 20px;">
+            ${evaluationResult.passFailStatus === 'PASS' ? 'PASSED' : 'NEEDS IMPROVEMENT'}
+          </div>
+          <p style="color: #6b7280;">Overall Performance Score</p>
+        </div>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+          <div style="background: #f3f4f6; padding: 20px; border-radius: 8px;">
+            <h3 style="color: #1e40af; margin-bottom: 10px;">MCQ Score</h3>
+            <div style="font-size: 24px; font-weight: bold; color: #059669;">${evaluationResult.mcqScore || 0}%</div>
+          </div>
+          <div style="background: #f3f4f6; padding: 20px; border-radius: 8px;">
+            <h3 style="color: #1e40af; margin-bottom: 10px;">Written Answers</h3>
+            <div style="font-size: 24px; font-weight: bold; color: #059669;">${evaluationResult.longShortScore || 0}%</div>
+          </div>
+        </div>
+        
+        ${evaluationResult.strengths && evaluationResult.strengths.length > 0 ? `
+        <div style="margin-bottom: 30px;">
+          <h3 style="color: #059669; font-size: 20px; margin-bottom: 15px;">Strengths</h3>
+          <ul style="list-style: none; padding: 0;">
+            ${evaluationResult.strengths.map((strength: string) => `
+              <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                <span style="position: absolute; left: 0; color: #059669;">✓</span>
+                ${strength}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        ` : ''}
+        
+        ${evaluationResult.weaknesses && evaluationResult.weaknesses.length > 0 ? `
+        <div style="margin-bottom: 30px;">
+          <h3 style="color: #dc2626; font-size: 20px; margin-bottom: 15px;">Areas for Improvement</h3>
+          <ul style="list-style: none; padding: 0;">
+            ${evaluationResult.weaknesses.map((weakness: string) => `
+              <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                <span style="position: absolute; left: 0; color: #dc2626;">⚠</span>
+                ${weakness}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        ` : ''}
+        
+        ${evaluationResult.recommendations && evaluationResult.recommendations.length > 0 ? `
+        <div style="margin-bottom: 30px;">
+          <h3 style="color: #1e40af; font-size: 20px; margin-bottom: 15px;">Recommendations</h3>
+          <ul style="list-style: none; padding: 0;">
+            ${evaluationResult.recommendations.map((rec: string) => `
+              <li style="margin-bottom: 8px; padding-left: 20px; position: relative;">
+                <span style="position: absolute; left: 0; color: #1e40af;">💡</span>
+                ${rec}
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+        ` : ''}
+        
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #e5e7eb; text-align: center; color: #6b7280; font-size: 12px;">
+          <p>Generated by Technical Interview Simulator</p>
+          <p>Session ID: ${currentSessionId}</p>
+        </div>
+      `;
+      
+      document.body.appendChild(reportDiv);
+      
+      // Convert to canvas and then to PDF
+      const canvas = await html2canvas(reportDiv, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff'
+      });
+      
+      document.body.removeChild(reportDiv);
+      
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const imgWidth = 210;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      
+      let position = 0;
+      
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+      
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+      
+      // Download the PDF
+      const fileName = `interview-report-${techStack}-${new Date().toISOString().split('T')[0]}.pdf`;
+      pdf.save(fileName);
+      
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
     }
   };
 
@@ -997,7 +1226,7 @@ export default function TechnicalInterviewSimulator() {
                           <div className="text-center">
                             <div className="text-4xl font-bold text-green-600 mb-2">
                               {evaluationResult.overallScore}%
-                            </div>
+                          </div>
                             <div className="flex items-center justify-center gap-2 mb-4">
                               <Badge variant={evaluationResult.passFailStatus === 'PASS' ? 'default' : 'destructive'} 
                                      className={evaluationResult.passFailStatus === 'PASS' 
@@ -1014,18 +1243,18 @@ export default function TechnicalInterviewSimulator() {
                                     NEEDS IMPROVEMENT
                                   </>
                                 )}
-                              </Badge>
-                            </div>
-                            <p className="text-slate-600 dark:text-slate-400">
-                              {evaluationResult.correctAnswers} out of {evaluationResult.totalQuestions} questions correct
-                            </p>
+                            </Badge>
                           </div>
+                          <p className="text-slate-600 dark:text-slate-400">
+                              {evaluationResult.correctAnswers} out of {evaluationResult.totalQuestions} questions correct
+                          </p>
+                        </div>
 
-                          {/* MCQ Analysis */}
+                        {/* MCQ Analysis */}
                           {evaluationResult.mcqAnalysis && (
                             <div className="space-y-4">
                               <h3 className="text-lg font-semibold text-center">Question Analysis</h3>
-                              <div className="space-y-3">
+                            <div className="space-y-3">
                                 {evaluationResult.mcqAnalysis.map((question: any, index: number) => (
                                   <div key={index} className="p-4 border rounded-lg bg-slate-50 dark:bg-slate-800">
                                     <div className="flex items-start justify-between mb-2">
@@ -1034,52 +1263,52 @@ export default function TechnicalInterviewSimulator() {
                                              className={question.isCorrect ? 'bg-green-600' : 'bg-red-600'}>
                                         {question.isCorrect ? '✓ Correct' : '✗ Incorrect'}
                                       </Badge>
-                                    </div>
+                          </div>
                                     <p className="text-sm text-slate-700 dark:text-slate-300 mb-2">
                                       {question.questionText}
                                     </p>
                                     <div className="text-xs text-slate-600 dark:text-slate-400">
                                       <span className="font-medium">Your answer:</span> {question.userAnswer || 'No answer'}
-                                    </div>
+                            </div>
                                     {!question.isCorrect && (
                                       <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">
                                         <span className="font-medium">Correct answer:</span> {question.correctAnswer}
-                                      </div>
-                                    )}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
+                        </div>
+                      )}
+                    </div>
+                              ))}
+                          </div>
+                          </div>
+                        )}
 
                           {/* Feedback */}
-                          <div className="space-y-4">
+                            <div className="space-y-4">
                             {evaluationResult.strengths && evaluationResult.strengths.length > 0 && (
-                              <div>
+                          <div>
                                 <h3 className="text-lg font-semibold text-green-700 dark:text-green-400 mb-2">Strengths</h3>
-                                <ul className="space-y-1">
+                            <ul className="space-y-1">
                                   {evaluationResult.strengths.map((strength: string, index: number) => (
                                     <li key={index} className="flex items-center gap-2 text-sm">
                                       <CheckCircle className="w-4 h-4 text-green-600" />
                                       {strength}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                             )}
 
                             {evaluationResult.weaknesses && evaluationResult.weaknesses.length > 0 && (
-                              <div>
+                          <div>
                                 <h3 className="text-lg font-semibold text-orange-700 dark:text-orange-400 mb-2">Areas for Improvement</h3>
-                                <ul className="space-y-1">
+                            <ul className="space-y-1">
                                   {evaluationResult.weaknesses.map((weakness: string, index: number) => (
                                     <li key={index} className="flex items-center gap-2 text-sm">
                                       <AlertCircle className="w-4 h-4 text-orange-600" />
                                       {weakness}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
                             )}
 
                             {evaluationResult.recommendations && evaluationResult.recommendations.length > 0 && (
@@ -1095,33 +1324,83 @@ export default function TechnicalInterviewSimulator() {
                                 </ul>
                               </div>
                             )}
+                            
+                            {/* Download PDF Button - Only for Pro users with results */}
+                            {isPro && evaluationResult && (
+                              <div className="pt-6 border-t border-slate-200 dark:border-slate-700">
+                                <div className="text-center">
+                                  <Button 
+                                    onClick={downloadPDF}
+                                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                                  >
+                                    <Download className="w-4 h-4 mr-2" />
+                                    Download Report (PDF)
+                                  </Button>
+                                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2">
+                                    Get a detailed PDF report of your evaluation
+                                  </p>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </div>
                       ) : isPro ? (
-                        /* Pro User - Evaluation in Progress */
-                        <div className="space-y-4">
+                        /* Pro User - Different states based on evaluation status */
+                            <div className="space-y-4">
                           <div className="text-4xl font-bold text-blue-600 mb-2">
                             🎉 Interview Complete!
-                          </div>
-                          <div className="flex items-center justify-center gap-2">
-                            <Badge variant="default" className="bg-gradient-to-r from-blue-600 to-purple-600">
-                              <Clock className="w-3 h-3 mr-1" />
-                              AI Evaluation in Progress
-                            </Badge>
-                          </div>
-                          <p className="text-slate-600 dark:text-slate-400 text-lg">
-                            Your responses are being evaluated by AI. Results will be available in your dashboard soon.
-                          </p>
+                                  </div>
+                                  
+                          {evaluationStatus === 'processing' && (
+                            <>
+                              <div className="flex items-center justify-center gap-2">
+                                <Badge variant="default" className="bg-gradient-to-r from-blue-600 to-purple-600">
+                                  <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
+                                  {isPollingResults ? 'AI Evaluation in Progress' : 'Queued for AI Evaluation'}
+                                </Badge>
+                                    </div>
+                              <p className="text-slate-600 dark:text-slate-400 text-lg">
+                                {isPollingResults 
+                                  ? 'Your responses are being analyzed by AI. Results will appear automatically when ready.' 
+                                  : 'Your responses have been queued for AI evaluation. Results will be available soon.'}
+                              </p>
+                              {isPollingResults && (
+                                <div className="text-xs text-slate-500 dark:text-slate-400 text-center">
+                                  ⏱️ Checking for results every 10 seconds...
+                                    </div>
+                                  )}
+                            </>
+                          )}
+                          
+                                                    {evaluationStatus === 'error' && (
+                            <>
+                              <div className="flex items-center justify-center gap-2">
+                                <Badge variant="default" className="bg-gradient-to-r from-orange-600 to-yellow-600">
+                                  <Clock className="w-3 h-3 mr-1" />
+                                  Evaluation in Progress
+                                </Badge>
+                              </div>
+                              <p className="text-slate-600 dark:text-slate-400 text-lg text-center">
+                                Thank you for your patience! The evaluation is taking longer than expected. 
+                                Once completed, your results will be reflected on your dashboard.
+                              </p>
+                              <div className="text-sm text-slate-500 dark:text-slate-400 text-center">
+                                <div className="mb-2">🎉 <strong>Interview Completed Successfully!</strong></div>
+                                <div className="text-xs">Session ID: {currentSessionId}</div>
+                              </div>
+                            </>
+                          )}
+                          
                           <div className="text-sm text-slate-500 dark:text-slate-400">
                             {userAnswers.length} questions answered • {techStack} • Pro User
-                          </div>
-                        </div>
-                      ) : (
+                              </div>
+                      </div>
+                    ) : (
                         /* Fallback for any issues */
                         <div className="space-y-4">
                           <div className="text-4xl font-bold text-green-600 mb-2">
                             🎉 Interview Complete!
-                          </div>
+                        </div>
                           <div className="flex items-center justify-center gap-2">
                             <Badge variant="default" className="bg-gradient-to-r from-green-600 to-blue-600">
                               <CheckCircle className="w-3 h-3 mr-1" />
@@ -1133,9 +1412,9 @@ export default function TechnicalInterviewSimulator() {
                           </p>
                           <div className="text-sm text-slate-500 dark:text-slate-400">
                             {userAnswers.length} questions answered • {techStack} • {isPro ? 'Pro User' : 'Free User'}
-                          </div>
                         </div>
-                      )}
+                      </div>
+                    )}
                     </div>
 
                     <Button onClick={resetInterview} className="w-full">
@@ -1247,12 +1526,12 @@ export default function TechnicalInterviewSimulator() {
                           // Convert index to letter (0->A, 1->B, 2->C, 3->D)
                           const letterValue = String.fromCharCode(65 + index); // 65 is ASCII for 'A'
                           return (
-                            <div key={index} className="flex items-center space-x-2">
+                          <div key={index} className="flex items-center space-x-2">
                               <RadioGroupItem value={letterValue} id={`option-${index}`} />
-                              <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
-                                {option}
-                              </Label>
-                            </div>
+                            <Label htmlFor={`option-${index}`} className="flex-1 cursor-pointer">
+                              {option}
+                            </Label>
+                          </div>
                           );
                         })}
                       </RadioGroup>
