@@ -57,7 +57,7 @@ export function StatsSection() {
         description="Your daily coding streak"
         value={`${state.streak} days`}
         icon={<Clock className="h-4 w-4" />}
-        linkHref="/activity"
+        linkHref="/profile"
         linkText="View Activity"
       />
     </div>

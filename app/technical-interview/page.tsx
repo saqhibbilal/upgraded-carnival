@@ -968,16 +968,13 @@ export default function TechnicalInterviewSimulator() {
 
   return (
     <AuthLayout>
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      <div className="container mx-auto px-4 py-6 max-w-6xl">
+    <div className="min-h-screen bg-background">
+      <div className="p-6">
         {/* Header with Pro Toggle */}
         <div className="flex justify-between items-center mb-8">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-              <Zap className="w-6 h-6 text-white" />
-            </div>
             <div>
-              <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Technical Interview Simulator</h1>
+              <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100">Technical Interview Simulator</h1>
               <p className="text-slate-600 dark:text-slate-400 text-sm">
                 Practice coding interviews with AI-powered feedback
               </p>
@@ -992,7 +989,7 @@ export default function TechnicalInterviewSimulator() {
               id="pro-toggle"
               checked={isPro}
               onCheckedChange={setIsPro}
-              className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-purple-600 data-[state=checked]:to-blue-600"
+              className="data-[state=checked]:bg-blue-600"
             />
             <Label htmlFor="pro-toggle" className="text-sm font-medium flex items-center gap-1">
               <Crown className="w-4 h-4 text-yellow-500" />
@@ -1090,7 +1087,7 @@ export default function TechnicalInterviewSimulator() {
                       variant="outline"
                       size="sm"
                       onClick={() => setIsPro(true)}
-                      className="border-purple-200 text-purple-700 hover:bg-purple-50"
+                      className="border-blue-200 text-blue-700 hover:bg-blue-50"
                     >
                       Upgrade to Pro
                     </Button>
@@ -1154,7 +1151,7 @@ export default function TechnicalInterviewSimulator() {
               /* Start Screen */
               <Card className="h-full">
                 <CardContent className="flex flex-col items-center justify-center h-96 text-center">
-                  <div className="w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mb-6">
+                  <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mb-6">
                     {isLoadingQuestions && isPro ? (
                       <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-white"></div>
                     ) : (
@@ -1179,7 +1176,7 @@ export default function TechnicalInterviewSimulator() {
                     onClick={startInterview}
                     disabled={isPro ? (questions.length === 0 || isLoadingQuestions) : (!techStack || questions.length === 0)}
                     size="lg"
-                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                    className="bg-blue-600 hover:bg-blue-700"
                   >
                     {isLoadingQuestions && isPro ? "Generating Questions..." : "Start Interview"}
                   </Button>
@@ -1228,10 +1225,10 @@ export default function TechnicalInterviewSimulator() {
                               {evaluationResult.overallScore}%
                           </div>
                             <div className="flex items-center justify-center gap-2 mb-4">
-                              <Badge variant={evaluationResult.passFailStatus === 'PASS' ? 'default' : 'destructive'} 
-                                     className={evaluationResult.passFailStatus === 'PASS' 
-                                       ? 'bg-gradient-to-r from-green-600 to-blue-600' 
-                                       : 'bg-gradient-to-r from-red-600 to-orange-600'}>
+                                                              <Badge variant={evaluationResult.passFailStatus === 'PASS' ? 'default' : 'destructive'} 
+                                       className={evaluationResult.passFailStatus === 'PASS' 
+                                         ? 'bg-green-600' 
+                                         : 'bg-red-600'}>
                                 {evaluationResult.passFailStatus === 'PASS' ? (
                                   <>
                                     <CheckCircle className="w-3 h-3 mr-1" />
@@ -1331,7 +1328,7 @@ export default function TechnicalInterviewSimulator() {
                                 <div className="text-center">
                                   <Button 
                                     onClick={downloadPDF}
-                                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
+                                    className="bg-blue-600 hover:bg-blue-700 text-white"
                                   >
                                     <Download className="w-4 h-4 mr-2" />
                                     Download Report (PDF)
@@ -1354,7 +1351,7 @@ export default function TechnicalInterviewSimulator() {
                           {evaluationStatus === 'processing' && (
                             <>
                               <div className="flex items-center justify-center gap-2">
-                                <Badge variant="default" className="bg-gradient-to-r from-blue-600 to-purple-600">
+                                <Badge variant="default" className="bg-blue-600">
                                   <div className="animate-spin rounded-full h-3 w-3 border-b-2 border-white mr-1"></div>
                                   {isPollingResults ? 'AI Evaluation in Progress' : 'Queued for AI Evaluation'}
                                 </Badge>

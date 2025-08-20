@@ -57,6 +57,8 @@
     "html2canvas": "^1.4.1",
     "input-otp": "1.4.1",
     "jspdf": "^3.0.1",
+    "lottie-react": "^2.4.1",
+    "lottie-web": "^5.13.0",
     "lucide-react": "^0.454.0",
     "mammoth": "^1.9.1",
     "monaco-editor": "latest",
