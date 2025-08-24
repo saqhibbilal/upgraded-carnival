@@ -3,6 +3,14 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export async function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl
+
+  // Skip middleware for DSA tutor routes to prevent auth token conflicts
+  // This allows client-side Supabase operations to work without interference
+  if (pathname.startsWith('/dsa-tutor')) {
+    return NextResponse.next()
+  }
+
   let response = NextResponse.next({
     request: {
       headers: req.headers,
@@ -60,8 +68,6 @@ export async function middleware(req: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const { pathname } = req.nextUrl
-
   // Public routes that don't require authentication
   const publicRoutes = ['/', '/login', '/signup']
   const isPublicRoute = publicRoutes.includes(pathname)
@@ -117,4 +123,4 @@ export const config = {
      */
     '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
-} 
+}

@@ -11,7 +11,7 @@ type AuthContextType = {
   isRegistered: boolean
   login: (email: string, password: string) => Promise<any>
   logout: () => Promise<void>
-  refreshUser: () => Promise<void> // Add method to refresh user data
+  checkRegistrationStatus: () => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined)
@@ -23,93 +23,52 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter()
 
   // Check if user is registered
-  const checkRegistrationStatus = async (userId: string) => {
+  const checkRegistrationStatus = async () => {
+    if (!user?.id) {
+      setIsRegistered(false)
+      return
+    }
+
     try {
       const { data, error } = await supabase
         .from('users')
         .select('is_registered')
-        .eq('id', userId)
+        .eq('id', user.id)
         .single()
 
       if (error) {
         console.error('Error checking registration status:', error)
-        return false
+        setIsRegistered(false)
+        return
       }
 
-      return data?.is_registered || false
+      setIsRegistered(data?.is_registered || false)
     } catch (error) {
       console.error('Error checking registration status:', error)
-      return false
-    }
-  }
-
-  // Get authenticated user data using getUser() instead of getSession()
-  const getAuthenticatedUser = async () => {
-    try {
-      const { data, error } = await supabase.auth.getUser()
-      
-      if (error) {
-        console.error('Error getting authenticated user:', error)
-        return null
-      }
-      
-      if (data?.user) {
-        console.log('✅ Authenticated user found:', data.user.id)
-        return data.user
-      }
-      
-      return null
-    } catch (error) {
-      console.error('Exception getting authenticated user:', error)
-      return null
-    }
-  }
-
-  // Refresh user data - can be called when needed
-  const refreshUser = async () => {
-    const authenticatedUser = await getAuthenticatedUser()
-    if (authenticatedUser) {
-      setUser(authenticatedUser)
-      const registered = await checkRegistrationStatus(authenticatedUser.id)
-      setIsRegistered(registered)
-    } else {
-      setUser(null)
       setIsRegistered(false)
     }
   }
 
   // Load session on mount
   useEffect(() => {
-    const initializeAuth = async () => {
-      setLoading(true)
-      
-      // Get authenticated user on mount
-      const authenticatedUser = await getAuthenticatedUser()
-      if (authenticatedUser) {
-        setUser(authenticatedUser)
-        const registered = await checkRegistrationStatus(authenticatedUser.id)
-        setIsRegistered(registered)
+    const getSession = async () => {
+      const { data, error } = await supabase.auth.getUser()
+      if (data?.user) {
+        setUser(data.user)
+        // Check registration status after user is set
+        setTimeout(() => checkRegistrationStatus(), 100)
       }
-      
       setLoading(false)
     }
 
-    initializeAuth()
+    getSession()
 
-    // Listen for auth state changes but always verify with getUser()
-    const { data: listener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log('🔄 Auth state change:', event, session?.user?.id)
-      
-      if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-        // Always get fresh authenticated user data
-        const authenticatedUser = await getAuthenticatedUser()
-        if (authenticatedUser) {
-          setUser(authenticatedUser)
-          const registered = await checkRegistrationStatus(authenticatedUser.id)
-          setIsRegistered(registered)
-        }
-      } else if (event === 'SIGNED_OUT') {
-        setUser(null)
+    const { data: listener } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      setUser(session?.user || null)
+      if (session?.user) {
+        // Check registration status when auth state changes
+        setTimeout(() => checkRegistrationStatus(), 100)
+      } else {
         setIsRegistered(false)
       }
     })
@@ -124,20 +83,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const { error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (!error) {
-      // Get fresh authenticated user data after login
-      const authenticatedUser = await getAuthenticatedUser()
-      if (authenticatedUser) {
-        setUser(authenticatedUser)
-        const registered = await checkRegistrationStatus(authenticatedUser.id)
-        setIsRegistered(registered)
+      const { data } = await supabase.auth.getUser()
+      setUser(data?.user || null)
+      
+      // Check registration status and redirect accordingly
+      const checkAndRedirect = async () => {
+        await checkRegistrationStatus()
+        // Use the updated isRegistered state
+        const { data: userData } = await supabase
+          .from('users')
+          .select('is_registered')
+          .eq('id', data?.user?.id)
+          .single()
         
-        // Redirect based on registration status
-        if (registered) {
+        if (userData?.is_registered) {
           router.push('/dashboard')
         } else {
           router.push('/register')
         }
       }
+      
+      setTimeout(checkAndRedirect, 300)
     }
 
     setLoading(false)
@@ -152,7 +118,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, loading, isRegistered, login, logout, refreshUser }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      loading, 
+      isRegistered, 
+      login, 
+      logout, 
+      checkRegistrationStatus 
+    }}>
       {children}
     </AuthContext.Provider>
   )

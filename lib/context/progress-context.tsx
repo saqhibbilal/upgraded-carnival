@@ -136,7 +136,7 @@ function progressReducer(state: ProgressState, action: ProgressAction): Progress
 }
 
 export function ProgressProvider({ children }: { children: React.ReactNode }) {
-  const { user, refreshUser } = useAuth()
+  const { user } = useAuth()
   const [state, dispatch] = useReducer(progressReducer, initialState)
   const [problems, setProblems] = useState<Question[]>([])
 
@@ -167,7 +167,7 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
       console.log("Fetching progress for user ID:", user.id)
       const { data, error } = await supabase
         .from("users")
-        .select("progress, first_name, last_name, display_name, role, is_registered, profile")
+        .select("progress, first_name, last_name, display_name, role")
         .eq("id", user.id)
         .maybeSingle()
 
@@ -186,8 +186,6 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
             last_name: user.user_metadata?.last_name || "User",
             display_name: user.user_metadata?.display_name || null,
             role: "user",
-            is_registered: false,
-            profile: null,
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString(),
           })
@@ -218,71 +216,38 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
     dispatch({ type: "UPDATE_STREAK" })
   }, [user])
 
-  // Enhanced saveProgress with retry logic and better error handling
-  const saveProgress = async (updatedState: ProgressState, retryCount = 0) => {
-    console.log(`🔄 saveProgress called (attempt ${retryCount + 1})`)
-    
+  const saveProgress = async (updatedState: ProgressState) => {
     if (!user || !user.id) {
-      console.warn("❌ No user or user.id available, skipping progress save")
+      console.warn("No user or user.id available, skipping progress save")
       return
     }
 
     try {
-      console.log("📝 Saving progress for user ID:", user.id)
-      console.log("📊 Progress data:", JSON.stringify(updatedState, null, 2))
-      
-      // First, verify the user still exists and is authenticated
-      console.log("🔍 Verifying user exists...")
+      console.log("Saving progress for user ID:", user.id, "Data:", updatedState)
       const { data: existingUser, error: fetchError } = await supabase
         .from("users")
-        .select("first_name, last_name, display_name, role, is_registered, profile")
+        .select("first_name, last_name, display_name, role")
         .eq("id", user.id)
         .single()
 
       if (fetchError) {
-        console.error("❌ User verification failed:", fetchError)
         throw new Error(`Failed to fetch user for update: ${fetchError.message}`)
       }
 
-      console.log("✅ User verified, updating progress...")
-      const { data: updateResult, error } = await supabase
+      const { error } = await supabase
         .from("users")
         .update({
           progress: updatedState,
           updated_at: new Date().toISOString(),
         })
         .eq("id", user.id)
-        .select()
 
       if (error) {
-        console.error("❌ Supabase update error:", error)
         throw new Error(`Supabase error: ${error.message}, code: ${error.code}, details: ${error.details}`)
       }
-      
-      console.log("✅ Progress saved successfully!")
-      console.log("📊 Update result:", updateResult)
+      console.log("Progress saved successfully:", updatedState)
     } catch (error) {
-      console.error("❌ Error saving progress:", error)
-      
-      // Retry logic for transient errors
-      if (retryCount < 3) {
-        console.log(`🔄 Retrying progress save (attempt ${retryCount + 1}/3)...`)
-        
-        // Wait a bit before retrying
-        await new Promise(resolve => setTimeout(resolve, 1000 * (retryCount + 1)))
-        
-        // Try to refresh user data before retry
-        try {
-          console.log("🔄 Refreshing user data before retry...")
-          await refreshUser()
-        } catch (refreshError) {
-          console.warn("⚠️ Failed to refresh user data:", refreshError)
-        }
-        
-        return saveProgress(updatedState, retryCount + 1)
-      } else {
-        console.error("❌ Failed to save progress after 3 retries")
-      }
+      console.error("Error saving progress:", error)
     }
   }
 
@@ -295,33 +260,15 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
   }, [user, loadProblems, loadProgress])
 
   const markProblemSolved = (problemId: number, codeLength?: number, solveTime?: number, errorCount?: number) => {
-    console.log(`🎯 markProblemSolved called for problem ${problemId}`)
-    console.log(`📊 Parameters: codeLength=${codeLength}, solveTime=${solveTime}, errorCount=${errorCount}`)
-    
     const updatedState = progressReducer(state, { type: "MARK_SOLVED", payload: { problemId, codeLength, solveTime, errorCount } })
-    console.log(`📈 Updated state:`, updatedState)
-    
     dispatch({ type: "MARK_SOLVED", payload: { problemId, codeLength, solveTime, errorCount } })
-    
-    // Call saveProgress and handle any errors
-    saveProgress(updatedState).catch(error => {
-      console.error("❌ Error in markProblemSolved saveProgress:", error)
-    })
+    saveProgress(updatedState)
   }
 
   const markProblemAttempted = (problemId: number, errorCount?: number) => {
-    console.log(`🎯 markProblemAttempted called for problem ${problemId}`)
-    console.log(`📊 Parameters: errorCount=${errorCount}`)
-    
     const updatedState = progressReducer(state, { type: "MARK_ATTEMPTED", payload: { problemId, errorCount } })
-    console.log(`📈 Updated state:`, updatedState)
-    
     dispatch({ type: "MARK_ATTEMPTED", payload: { problemId, errorCount } })
-    
-    // Call saveProgress and handle any errors
-    saveProgress(updatedState).catch(error => {
-      console.error("❌ Error in markProblemAttempted saveProgress:", error)
-    })
+    saveProgress(updatedState)
   }
 
   const resetProgress = () => {
@@ -362,7 +309,9 @@ export function ProgressProvider({ children }: { children: React.ReactNode }) {
 
 export function useProgress() {
   const context = useContext(ProgressContext)
-
+  if (context === undefined) {
+    throw new Error("useProgress must be used within a ProgressProvider")
+  }
   return context
 }
  
