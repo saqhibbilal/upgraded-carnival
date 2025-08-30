@@ -635,3 +635,13 @@ export function useProgress() {
  uRdKygKYodrMofDhjo8VTt0nzNWK0Oqu
  //const JUDGE0_RAPIDAPI_KEY = "31a80bb44emshf43b9f34d2bfa75p191a9djsnde7c2e4a875f"
 //const JUDGE0_RAPIDAPI_KEY = "a06398ccc2msh296af233dd0e16ep175ea8jsn9cbae2cadc64"
+
+- automating queue processing / SSE for code assistance at DSA tutor page 
+- user refrenceing for new tables 
+- after that we will do technical interview reports storing in progress tab with problems
+- frontend and name
+- HR interview page 
+- deployment (AWS/supabase/vercel/judge0/mistral)
+- Debugging
+- Migrate to other github
+wt8xMzV8E8KphRJlLfJblmsCgrUYaegw(mistral key)
