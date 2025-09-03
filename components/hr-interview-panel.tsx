@@ -48,7 +48,22 @@ interface HRInterviewPanelProps {
   question: string
   onNextQuestion: () => void
   isLastQuestion: boolean
-  interviewMode: "text" | "video"
+  interviewMode: "pro" | "video"
+  // Phase 4: Response Tracking Props
+  currentQuestionIndex: number
+  onUpdateResponse: (questionIndex: number, response: string) => Promise<void>
+  getCurrentResponse: (questionIndex: number) => any
+  responseStatus: {
+    isSaving: boolean
+    lastSaved: string | null
+    saveError: string | null
+  }
+  // Phase 5: Progress tracking
+  hrInterviewQuestions?: Array<{
+    question_text: string
+    question_type: string
+    topic: string
+  }>
 }
 
 type VoiceGender = "male" | "female"
@@ -58,6 +73,13 @@ export function HRInterviewPanel({
   onNextQuestion,
   isLastQuestion,
   interviewMode,
+  // Phase 4: Response Tracking Props
+  currentQuestionIndex,
+  onUpdateResponse,
+  getCurrentResponse,
+  responseStatus,
+  // Phase 5: Progress tracking
+  hrInterviewQuestions,
 }: HRInterviewPanelProps) {
   const [hrAnswerText, setHRAnswerText] = useState("")
   const [hrThinkTime, setHRThinkTime] = useState(15)
@@ -105,9 +127,9 @@ export function HRInterviewPanel({
   }, [question]);
 
   // Interview session state
-  const [hasHRInterviewStarted, setHasHRInterviewStarted] = useState(interviewMode === "video")
-  // Setup gate: shown immediately in video mode
-  const [needsSetup, setNeedsSetup] = useState(interviewMode === "video")
+  const [hasHRInterviewStarted, setHasHRInterviewStarted] = useState(interviewMode === "video" || interviewMode === "pro")
+  // Setup gate: shown immediately in video mode and pro mode
+  const [needsSetup, setNeedsSetup] = useState(interviewMode === "video" || interviewMode === "pro")
 
   // media
   const [videoStream, setVideoStream] = useState<MediaStream | null>(null)
@@ -204,24 +226,25 @@ export function HRInterviewPanel({
   const formatHRTime = (s: number) =>
     `${String(Math.floor(s / 60)).padStart(2, "0")}:${String(s % 60).padStart(2, "0")}`;
 
-  // Save interview data to localStorage for backup (no longer downloads files)
+  // Save interview data to localStorage for backup (disabled to prevent quota issues)
   const saveInterviewToLocalStorage = useCallback(async (data: any, filename: string) => {
-    try {
-      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-      const dataStr = JSON.stringify(data, null, 2);
-      const backupKey = `backup_${filename}_${timestamp}`;
-      localStorage.setItem(backupKey, dataStr);
-      console.log(`[Backup] Saved to localStorage: ${backupKey}`);
-    } catch (e) {
-      console.error("Failed to save interview data to localStorage:", e);
-    }
+    // Disabled to prevent localStorage quota issues
+    console.log(`[Backup] Skipping localStorage backup for ${filename} to prevent quota issues`);
   }, []);
 
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setHRAnswerText(value);
-    if (interviewMode === "text" && !hasStartedAnswering && value.trim().length > 0) {
+    if ((interviewMode === "pro" || interviewMode === "video") && !hasStartedAnswering && value.trim().length > 0) {
       setHasStartedAnswering(true);
+    }
+    
+    // Phase 4: Auto-save response as user types (both modes now)
+    if (interviewMode === "pro" || interviewMode === "video") {
+      // Combine typed text with speech transcript for both modes
+      const combinedResponse = (value + " " + finalTranscriptRef.current).trim();
+      console.log(`[Text Auto-save] ${interviewMode} mode Q${currentQuestionIndex + 1} (index: ${currentQuestionIndex}):`, combinedResponse.length, 'chars')
+      onUpdateResponse(currentQuestionIndex, combinedResponse);
     }
   };
 
@@ -425,11 +448,22 @@ export function HRInterviewPanel({
   // Commit current transcript to local storage
   const commitCurrentTranscript = useCallback(() => {
     if (questionRef.current) {
-      const final = [
-        hrAnswerText,                 // typed text
-        finalTranscriptRef.current,   // finalized STT
-        interimTranscript             // last interim (if any)
-      ].join(" ").replace(/\s+/g, " ").trim();
+      // Phase 4: Enhanced response combination for both modes
+      let final;
+      if (interviewMode === "pro") {
+        // Pro mode: Combine typed text with speech transcript
+        final = [
+          hrAnswerText,                 // typed text
+          finalTranscriptRef.current,   // finalized STT
+          interimTranscript             // last interim (if any)
+        ].join(" ").replace(/\s+/g, " ").trim();
+      } else {
+        // Video mode: Speech transcript only
+        final = [
+          finalTranscriptRef.current,   // finalized STT
+          interimTranscript             // last interim (if any)
+        ].join(" ").replace(/\s+/g, " ").trim();
+      }
 
       // Always save entry, even if empty (null for transcription)
       const entry = { 
@@ -558,6 +592,18 @@ export function HRInterviewPanel({
       }
       setFinalTranscript(finalTranscriptRef.current);
       setInterimTranscript(interim);
+      
+      // Phase 4: Auto-save response for both video and pro modes
+      if (interviewMode === "video") {
+        const fullResponse = (finalTranscriptRef.current + " " + interim).trim();
+        console.log(`[STT Auto-save] Video mode Q${currentQuestionIndex + 1} (index: ${currentQuestionIndex}):`, fullResponse.length, 'chars')
+        onUpdateResponse(currentQuestionIndex, fullResponse);
+      } else if (interviewMode === "pro") {
+        // For pro mode, combine speech with typed text
+        const combinedResponse = (hrAnswerText + " " + finalTranscriptRef.current + " " + interim).trim();
+        console.log(`[STT Auto-save] Pro mode Q${currentQuestionIndex + 1} (index: ${currentQuestionIndex}):`, combinedResponse.length, 'chars')
+        onUpdateResponse(currentQuestionIndex, combinedResponse);
+      }
     };
 
     recognitionRef.current = r;
@@ -578,16 +624,34 @@ export function HRInterviewPanel({
     setIsProcessingAction(true);
     try {
       stopSTT(); // Stop STT immediately
-      commitCurrentTranscript(); // Commit current answer
+      
+      // Always save the current response before proceeding
+      let currentResponse = "";
+      if (interviewMode === "pro") {
+        currentResponse = (hrAnswerText + " " + finalTranscriptRef.current).trim();
+      } else {
+        currentResponse = (finalTranscriptRef.current + " " + interimTranscript).trim();
+      }
+      
+      if (currentResponse.trim()) {
+        console.log(`[Submit] Saving final response for Q${currentQuestionIndex + 1}:`, currentResponse.length, 'chars');
+        await onUpdateResponse(currentQuestionIndex, currentResponse);
+      }
+      
+      // Now commit transcript after saving response
+      commitCurrentTranscript();
+      
       if (isLastQuestion) {
+        console.log('[Submit] Last question - finishing interview');
         await saveInterviewOnce();
       } else {
+        console.log('[Submit] Moving to next question');
         onNextQuestion();
       }
     } finally {
       setIsProcessingAction(false);
     }
-  }, [onNextQuestion, isLastQuestion, saveInterviewOnce, stopSTT, commitCurrentTranscript, isProcessingAction]);
+  }, [onNextQuestion, isLastQuestion, saveInterviewOnce, stopSTT, commitCurrentTranscript, isProcessingAction, interviewMode, hrAnswerText, currentQuestionIndex, onUpdateResponse]);
 
   // ---------- Beep utility ----------
   const beep = useCallback((ms = 300, freq = 880) => {
@@ -622,16 +686,35 @@ export function HRInterviewPanel({
     } catch {}
   }, []);
 
-  // ========== New flow for VIDEO mode ==========
-  // Immediately enter "interview started" state in video mode and show setup assistant
+  // ========== New flow for VIDEO and PRO modes ==========
+  // Immediately enter "interview started" state in video mode and pro mode and show setup assistant
   useEffect(() => {
-    if (interviewMode !== "video") return;
-    setHasHRInterviewStarted(true);
-    setNeedsSetup(true);
-    // prepare hardware, but do not broadcast yet
-    startCamera();
-    startMic();
-    warmupTTS();
+    if (interviewMode !== "video" && interviewMode !== "pro") return;
+    
+    // Check if we already completed setup for this interview session
+    const setupCompleted = localStorage.getItem('hr_interview_setup_completed');
+    
+    if (setupCompleted === 'true') {
+      // Setup already completed, skip to interview
+      setHasHRInterviewStarted(true);
+      setNeedsSetup(false);
+      console.log('[Setup] Skipping setup - already completed in this session');
+      
+      // Still prepare hardware for ongoing interview
+      startCamera();
+      startMic();
+      warmupTTS();
+    } else {
+      // First time setup
+      setHasHRInterviewStarted(true);
+      setNeedsSetup(true);
+      console.log('[Setup] Starting first-time setup');
+      
+      // prepare hardware, but do not broadcast yet
+      startCamera();
+      startMic();
+      warmupTTS();
+    }
     // Do NOT set pendingUtterance here; wait until user confirms in assistant
   }, [interviewMode, startCamera, startMic, warmupTTS]);
 
@@ -639,6 +722,10 @@ export function HRInterviewPanel({
   const handleConfirmSetup = useCallback(() => {
     if (!videoStream) return;
     setNeedsSetup(false);
+
+    // Mark setup as completed for this interview session
+    localStorage.setItem('hr_interview_setup_completed', 'true');
+    console.log('[Setup] Marked setup as completed for this session');
 
     // Set question ID for video mode
     currentQuestionIdRef.current = question;
@@ -962,6 +1049,7 @@ export function HRInterviewPanel({
     questionRef.current = question;
     if (hasHRInterviewStarted && prevQuestion && prevQuestion !== question) {
       console.log("[Question Change] New question detected, resetting state");
+      console.log("[Question Change] Current question index:", currentQuestionIndex);
       
       // Immediately cancel any ongoing TTS and force reset STT for a clean slate
       cancelTTS();
@@ -986,52 +1074,53 @@ export function HRInterviewPanel({
       if (!isFrozen && !needsSetup) {
         setPendingUtterance(question);
       }
+      
+      // Don't reset responses here - let the main page handle that
     }
-  }, [question, hasHRInterviewStarted, isFrozen, needsSetup, forceResetSTT, cancelTTS]);
+  }, [question, hasHRInterviewStarted, isFrozen, needsSetup, forceResetSTT, cancelTTS, currentQuestionIndex]);
+
+  // Monitor currentQuestionIndex changes
+  useEffect(() => {
+    console.log("[Question Index Change] currentQuestionIndex changed to:", currentQuestionIndex);
+  }, [currentQuestionIndex]);
 
   // ---------- Policy events from detector (multi-person) ----------
+  // Phase 4: Remove face detection interruption - just log and continue
   const handlePolicyEvent = useCallback((e: { type: "multi-person-detected" }) => {
     if (e.type !== "multi-person-detected") return;
 
+    // Phase 4: Don't freeze interview, just log the event
+    console.log("[Face Detection] Multiple faces detected - logging for report");
+    
+    // Optionally pause TTS briefly but don't freeze the entire interview
     try {
       if (window.speechSynthesis.speaking) {
         window.speechSynthesis.pause();
         policyPausedRef.current = true;
         setIsSpeaking(false);
+        
+        // Resume TTS after a short pause instead of freezing
+        setTimeout(() => {
+          try {
+            if (policyPausedRef.current && (window.speechSynthesis as any).paused) {
+              (window.speechSynthesis as any).resume();
+              setIsSpeaking(false);
+            }
+          } catch {}
+          policyPausedRef.current = false;
+        }, 1000); // Only pause for 1 second instead of 3
       }
     } catch {}
+    
+    // No more freezing - interview continues smoothly
+    // setFreezeSecondsLeft(3);
+    // setIsFrozen(true);
+  }, []);
 
-    beep();
-    setFreezeSecondsLeft(3);
-    setIsFrozen(true);
-
-    const interval = setInterval(() => {
-      setFreezeSecondsLeft((s) => (s > 0 ? s - 1 : 0));
-    }, 1000);
-
-    setTimeout(() => {
-      clearInterval(interval);
-      setIsFrozen(false);
-      try {
-        if (policyPausedRef.current && (window.speechSynthesis as any).paused) {
-          (window.speechSynthesis as any).resume();
-        }
-      } catch {}
-      policyPausedRef.current = false;
-    }, 3000);
-  }, [beep]);
-
-  const renderAnswerInterface = () =>
-    interviewMode === "text" ? (
-      <Textarea
-        placeholder="Type your answer here..."
-        value={hrAnswerText}
-        onChange={handleTextChange}
-        className="h-[14vh] min-h-0 resize-none"
-        disabled={isFrozen}
-      />
-    ) : (
-      <div className="h-[14vh] flex flex-col">
+  const renderAnswerInterface = () => (
+    <div className="h-[20vh] flex flex-col">
+      {/* Enhanced interfaces for both modes - now both support typing and STT */}
+      <>
         {speechSupported && (
           <div className="flex items-center gap-2 text-sm mb-2">
             <StatusBadge isListening={isSpeechListening} />
@@ -1041,17 +1130,49 @@ export function HRInterviewPanel({
           </div>
         )}
         <Textarea
-          readOnly
-          value={(finalTranscript + " " + interimTranscript).trim()}
-          placeholder="Speak into the microphone… live transcription will appear here."
+          value={hrAnswerText + (finalTranscriptRef.current ? " " + finalTranscriptRef.current : "") + (interimTranscript ? " " + interimTranscript : "")}
+          onChange={handleTextChange}
+          placeholder={interviewMode === "pro" 
+            ? "Type your answer here OR speak into the microphone..." 
+            : "Type your answer here OR speak into the microphone..."
+          }
           className="flex-1 min-h-0 resize-none"
-          disabled={isFrozen || !speechSupported}
         />
         {speechError && <div className="mt-2 text-xs text-red-700 bg-red-50 border border-red-200 p-2 rounded-md">{speechError}</div>}
+      </>
+      
+      {/* Phase 4: Response Status Indicators */}
+      <div className="mt-2 flex items-center justify-between text-xs">
+        <div className="flex items-center gap-2">
+          {responseStatus.isSaving && (
+            <div className="flex items-center gap-1 text-blue-600">
+              <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
+              Saving...
+            </div>
+          )}
+          {responseStatus.saveError && (
+            <div className="flex items-center gap-1 text-red-600">
+              <div className="w-2 h-2 bg-red-600 rounded-full"></div>
+              {responseStatus.saveError}
+            </div>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          {/* Show current response status */}
+          <div className="text-gray-600">
+            Q{currentQuestionIndex + 1}: {getCurrentResponse(currentQuestionIndex)?.hasResponse ? '✓ Answered' : '⏳ Pending'}
+          </div>
+          {responseStatus.lastSaved && (
+            <div className="text-green-600">
+              ✓ Saved at {responseStatus.lastSaved}
+            </div>
+          )}
+        </div>
       </div>
-    );
+    </div>
+  );
 
-    const showSetup = hasHRInterviewStarted && interviewMode === "video" && videoStream && needsSetup;
+    const showSetup = hasHRInterviewStarted && (interviewMode === "video" || interviewMode === "pro") && videoStream && needsSetup;
  
   // track alignment status from assistant
   const [isSetupAligned, setIsSetupAligned] = useState(false);
@@ -1061,9 +1182,14 @@ export function HRInterviewPanel({
       <CardHeader className="pt-3 pb-0 min-h-0">
         <div className="flex justify-between items-center mb-2">
           <CardTitle className="text-xl font-bold text-gray-800">Interview Question</CardTitle>
+          
+          {/* Simple progress indicator */}
+          <div className="text-sm text-gray-600">
+            Question {currentQuestionIndex + 1} of {hrInterviewQuestions?.length || 4}
+          </div>
 
-          {/* Voice gender selection only before session (text mode) */}
-          {!hasHRInterviewStarted && interviewMode === "text" && (
+          {/* Voice gender selection only before session (pro mode) */}
+          {!hasHRInterviewStarted && interviewMode === "pro" && (
             <div className="flex items-center gap-2 text-sm">
               <span className="mr-1 text-gray-600 flex items-center gap-1">
                 HR Voice
@@ -1126,8 +1252,8 @@ export function HRInterviewPanel({
           </div>
         )}
 
-        {/* Intro block only for TEXT mode */}
-        {!hasHRInterviewStarted && interviewMode === "text" ? (
+        {/* Intro block only for PRO mode */}
+        {!hasHRInterviewStarted && interviewMode === "pro" ? (
           <div className="flex flex-col items-center justify-center py-8">
             <p className="text-lg text-gray-600 mb-2 text-center">Ready to begin your interview simulation?</p>
             <p className="text-xs text-gray-500 mb-2">
@@ -1142,10 +1268,10 @@ export function HRInterviewPanel({
             <Button
               onClick={() => {
                 setHasHRInterviewStarted(true);
-                // Set question ID for text mode
+                // Set question ID for pro mode
                 currentQuestionIdRef.current = question;
                 currentTranscriptionIdRef.current = question;
-                // Ensure user preference is set to unmuted for text mode (so STT auto-starts after TTS)
+                // Ensure user preference is set to unmuted for pro mode (so STT auto-starts after TTS)
                 userMicPrefRef.current = true;
                 setPendingUtterance(question);
               }}
@@ -1167,13 +1293,13 @@ export function HRInterviewPanel({
                     size="sm"
                     className="text-gray-600 hover:text-blue-600"
                     onClick={() => (!chosenVoice ? setPendingUtterance(question) : speakQuestion(question))}
-                    disabled={isSpeaking || isFrozen}
+                    disabled={isSpeaking}
                     title={isSpeaking ? "Speaking…" : "Re-read Question"}
                   >
                     <Volume2 className="h-4 w-4 mr-1" /> {isSpeaking ? "Speaking…" : "Re-read Question"}
                   </Button>
                   {isSpeaking && (
-                    <Button variant="ghost" size="sm" onClick={cancelTTS} title="Stop speaking" disabled={isFrozen}>
+                    <Button variant="ghost" size="sm" onClick={cancelTTS} title="Stop speaking">
                       Stop
                     </Button>
                   )}
@@ -1185,22 +1311,8 @@ export function HRInterviewPanel({
             <div className="mt-3 rounded-xl bg-gray-50 border">
               {/* Keep height in a wrapper so the button can sit outside within white space */}
               <div className="relative h-[48vh] min-h-0">
-                {/* ❄️ FREEZE OVERLAY */}
-                {isFrozen && !needsSetup && (
-                  <>
-                    <div className="absolute inset-0 z-30 backdrop-blur-sm bg-black/20" />
-                    <div className="absolute inset-0 z-40 flex items-center justify-center">
-                      <div className="bg-white/95 border rounded-2xl shadow-xl px-6 py-5 text-center max-w-xs">
-                        <div className="mx-auto mb-2 w-12 h-12 flex items-center justify-center rounded-full bg-red-50 border border-red-200">
-                          <Lock className="w-6 h-6 text-red-600" />
-                        </div>
-                        <div className="font-semibold text-gray-800">Multiple faces detected</div>
-                        <div className="text-sm text-gray-600 mt-1">Interview is temporarily paused</div>
-                        <div className="mt-3 text-xs text-gray-500">Resuming in {freezeSecondsLeft}s…</div>
-                      </div>
-                    </div>
-                  </>
-                )}
+                {/* Phase 4: Face detection events are logged but don't freeze interview */}
+                {/* Removed freezing overlay - interview continues smoothly */}
 
                 {/* Setup assistant: full focus UI; no left preview broadcast yet */}
                 {showSetup ? (
@@ -1232,11 +1344,10 @@ export function HRInterviewPanel({
                         onClick={toggleMic}
                         variant={isSpeechListening ? "default" : "outline"}
                         className={cn(
-                          "h-6 px-2 py-0 text-[11px] mb-1",
+                          "h-6 px-2 py-2 text-[11px] mb-1",
                           isSpeechListening ? "bg-blue-600 hover:bg-blue-700" : "border-gray-300 text-gray-700"
                         )}
                         title={isSpeechListening ? "Mute mic" : "Turn mic on"}
-                        disabled={isFrozen}
                       >
                         {isSpeechListening ? <><Mic className="h-3 w-3 mr-1" /> Mute</> : <><MicOff className="h-3 w-3 mr-1" /> Unmute</>}
                       </Button>
@@ -1271,7 +1382,7 @@ export function HRInterviewPanel({
                           externalStream={videoStream}
                           showVideo={false}
                           saveMode="manual"      // only save at successful end
-                          paused={isFrozen}      // freeze inference during penalty
+                          paused={false}         // Phase 4: Never pause - interview continues smoothly
                           onPolicyEvent={handlePolicyEvent}
                         />
                       </div>
@@ -1297,9 +1408,57 @@ export function HRInterviewPanel({
               Mode: <span className="font-semibold capitalize">{interviewMode}</span>
               {" • TTS voice: "}
               <span className="font-medium">{chosenVoice ? chosenVoice.name : "Loading…"}</span>
-              {isFrozen ? " • Paused (multiple faces detected)" : ""}
+              {/* Phase 4: Face detection events are logged but don't pause interview */}
             </div>
             <div className="flex gap-2">
+              {/* Save Answer Button - Always visible */}
+              <Button 
+                variant="outline"
+                onClick={async () => {
+                  if (isProcessingAction) return;
+                  setIsProcessingAction(true);
+                  try {
+                    console.log("[UI Action] Save Answer clicked for Q", currentQuestionIndex + 1);
+                    
+                    // Get current response text - combine all sources
+                    let currentResponse = "";
+                    if (interviewMode === "pro") {
+                      // Pro mode: typed text + speech transcript
+                      currentResponse = [
+                        hrAnswerText,
+                        finalTranscriptRef.current,
+                        interimTranscript
+                      ].filter(Boolean).join(" ").trim();
+                    } else {
+                      // Video mode: speech transcript only
+                      currentResponse = [
+                        finalTranscriptRef.current,
+                        interimTranscript
+                      ].filter(Boolean).join(" ").trim();
+                    }
+                    
+                    console.log("[UI Action] Current response to save:", currentResponse);
+                    
+                    if (currentResponse.trim()) {
+                      // Update response
+                      await onUpdateResponse(currentQuestionIndex, currentResponse);
+                      console.log("[UI Action] Answer saved successfully for Q", currentQuestionIndex + 1);
+                    } else {
+                      console.log("[UI Action] No content to save");
+                    }
+                  } catch (error) {
+                    console.error("[UI Action] Failed to save answer:", error);
+                  } finally {
+                    setIsProcessingAction(false);
+                  }
+                }}
+                disabled={isProcessingAction || isSpeaking}
+                title="Save your current answer for this question"
+                className="bg-green-50 border-green-200 text-green-700 hover:bg-green-100 text-xs px-2.5 py-1 h-[30px]"
+              >
+                💾 Save Answer
+              </Button>
+
               {/* Only show "Skip Question" if not the last question */}
               {!isLastQuestion && (
                 <Button
@@ -1317,15 +1476,47 @@ export function HRInterviewPanel({
                     }
                   }}
                   title="Skip to the next question"
-                  disabled={isFrozen || isProcessingAction || isSpeaking}
+                  disabled={isProcessingAction || isSpeaking}
+                  className="text-xs px-2.5 py-1 h-[30px]"
                 >
-                  <SkipForward className="h-4 w-4 mr-2" />
+                  <SkipForward className="h-3 w-3 mr-1.5" />
                   Skip Question
                 </Button>
               )}
 
               {/* "Submit Answer" or "Finish Interview" button */}
-              <Button onClick={handleSubmitHRAnswer} title={isLastQuestion ? "Finish the interview" : "Submit your answer"} disabled={isFrozen || isProcessingAction || isSpeaking}>
+              <Button 
+                onClick={async () => {
+                  if (isLastQuestion) {
+                    // Check if all questions are answered before finishing
+                    const totalQuestions = hrInterviewQuestions?.length || 0;
+                    const answeredQuestions = hrInterviewQuestions ? 
+                      hrInterviewQuestions.filter((_, i) => getCurrentResponse(i)?.hasResponse).length : 0;
+                    
+                                      if (answeredQuestions < totalQuestions) {
+                    const confirmFinish = confirm(
+                      `You have only answered ${answeredQuestions} out of ${totalQuestions} questions. Are you sure you want to finish the interview?`
+                    );
+                    if (!confirmFinish) return;
+                  }
+                  
+                  // Show final confirmation
+                  const finalConfirm = confirm(
+                    `Ready to finish your interview?\n\n` +
+                    `📊 Summary:\n` +
+                    `• Questions: ${totalQuestions}\n` +
+                    `• Answered: ${answeredQuestions}\n` +
+                    `• Completion: ${Math.round((answeredQuestions / totalQuestions) * 100)}%\n\n` +
+                    `Your responses will be saved and the final report will be generated.`
+                  );
+                  if (!finalConfirm) return;
+                }
+                handleSubmitHRAnswer();
+                }} 
+                title={isLastQuestion ? "Finish the interview" : "Submit your answer"} 
+                disabled={isProcessingAction || isSpeaking}
+                className={`text-xs px-2.5 py-1 h-[30px] ${isLastQuestion ? "bg-red-600 hover:bg-red-700" : ""}`}
+              >
                 {isProcessingAction ? (
                   <span className="flex items-center">
                     <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -1336,7 +1527,7 @@ export function HRInterviewPanel({
                   </span>
                 ) : (
                   <>
-                    <Send className="h-4 w-4 mr-2" />
+                    <Send className="h-3 w-3 mr-1.5" />
                     {isLastQuestion ? "Finish Interview" : "Submit Answer"}
                   </>
                 )}
@@ -1355,7 +1546,7 @@ function StatusBadge({ isListening }: { isListening: boolean }) {
       <span
         className={cn(
           "w-2.5 h-2.5 rounded-full inline-block",
-          isListening ? "bg-green-500 shadow-green-500/30 shadow-lg" : "bg-gray-400"
+          isListening ? "bg-blue-500 shadow-blue-500/30 shadow-lg" : "bg-gray-400"
         )}
       />
       <span className="font-semibold">
