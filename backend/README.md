@@ -1,6 +1,6 @@
-# SDE Hire Backend
+# upadyAI Backend
 
-This directory contains the backend services for the SDE Hire application.
+This directory contains the backend services for the upadyAI application.
 
 ## Problem Assistance Server
 
@@ -48,16 +48,20 @@ The Problem Assistance Server provides AI-powered explanations for DSA problems 
 ### API Endpoints
 
 #### GET /health
+
 Checks if the server is running.
 
 #### GET /explain
+
 Generates an explanation for a DSA problem using Ollama.
 
 **Query Parameters:**
+
 - `index`: The index of the problem (default: 0)
 - `refresh`: Whether to force a refresh of the cached explanation (default: false)
 
 #### DELETE /clear-cache
+
 Clears the cached responses.
 
 ## Folder Structure
