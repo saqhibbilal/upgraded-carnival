@@ -7,6 +7,7 @@ import { ProgressTab } from "./components/progress-tab"
 import { ActivityTab } from "./components/activity-tab"
 import { BadgesTab } from "./components/badges-tab"
 import { ReportsTab } from "./components/reports-tab"
+import { HRReportsTab } from "./components/hr-reports-tab"
 
 export default function ProfilePage() {
   return (
@@ -25,7 +26,8 @@ export default function ProfilePage() {
                 <TabsTrigger value="progress">Progress</TabsTrigger>
                 <TabsTrigger value="activity">Activity</TabsTrigger>
                 <TabsTrigger value="badges">Badges</TabsTrigger>
-                <TabsTrigger value="reports">Reports</TabsTrigger>
+                <TabsTrigger value="reports">Technical Reports</TabsTrigger>
+                <TabsTrigger value="hr-reports">HR Reports</TabsTrigger>
               </TabsList>
 
               <TabsContent value="progress">
@@ -42,6 +44,10 @@ export default function ProfilePage() {
 
               <TabsContent value="reports">
                 <ReportsTab />
+              </TabsContent>
+
+              <TabsContent value="hr-reports">
+                <HRReportsTab />
               </TabsContent>
             </Tabs>
           </div>

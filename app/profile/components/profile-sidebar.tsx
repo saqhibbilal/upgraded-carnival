@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
-import { Award, Star, Building2, Briefcase, Code } from "lucide-react"
+import { Award, Star, Building2, Briefcase, Code, Users } from "lucide-react"
 import { useAuth } from "@/lib/context/auth-context"
 import { useProgress } from "@/lib/context/progress-context"
 import { useEffect, useState } from "react"
@@ -21,6 +21,7 @@ export function ProfileSidebar() {
   const { user } = useAuth()
   const { state: progressState } = useProgress()
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+  const [hrInterviewCount, setHrInterviewCount] = useState<number>(0)
 
   // Get total problems count from questions.json
   const questions = require("@/app/dsa-tutor/questions.json")
@@ -31,12 +32,15 @@ export function ProfileSidebar() {
       if (user?.id) {
         const { data, error } = await supabase
           .from('users')
-          .select('profile')
+          .select('profile, hr_interview_count')
           .eq('id', user.id)
           .single()
 
-        if (!error && data?.profile) {
-          setUserProfile(data.profile)
+        if (!error && data) {
+          if (data.profile) {
+            setUserProfile(data.profile)
+          }
+          setHrInterviewCount(data.hr_interview_count || 0)
         }
       }
     }
@@ -111,6 +115,19 @@ export function ProfileSidebar() {
                 <div
                   className="h-full bg-primary"
                   style={{ width: `${Math.min(progressState.streak * 10, 100)}%` }}
+                ></div>
+              </div>
+            </div>
+
+            <div>
+              <div className="flex justify-between mb-1">
+                <span className="text-sm font-medium">HR Interviews</span>
+                <span className="text-sm font-medium">{hrInterviewCount} completed</span>
+              </div>
+              <div className="w-full h-2 bg-secondary rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-green-500"
+                  style={{ width: `${Math.min(hrInterviewCount * 20, 100)}%` }}
                 ></div>
               </div>
             </div>
