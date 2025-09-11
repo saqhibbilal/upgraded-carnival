@@ -961,31 +961,6 @@ export function HRInterviewReport({
           </CardContent>
         </Card>
 
-        {/* Debug Information */}
-        <Card className="dark:bg-slate-800 dark:border-slate-700">
-          <CardHeader><CardTitle className="dark:text-gray-100">🔍 Debug Information</CardTitle></CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-700">
-                <h4 className="font-semibold text-yellow-800 dark:text-yellow-300 mb-2">Interview Responses Debug</h4>
-                <div className="text-sm text-yellow-700 dark:text-yellow-300">
-                  <p><strong>Total Responses Array Length:</strong> {interviewResponses?.length || 'undefined'}</p>
-                  <p><strong>Responses with Content:</strong> {interviewResponses?.filter(r => r.hasResponse).length || 0}</p>
-                  <p><strong>First Response Sample:</strong> {interviewResponses && interviewResponses[0] ? 
-                    `Q1: ${interviewResponses[0].questionText?.substring(0, 50)}... | Response: ${interviewResponses[0].userResponse?.substring(0, 50) || 'No response'}...` 
-                    : 'No responses available'}</p>
-                </div>
-              </div>
-              
-              <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-700">
-                <h4 className="font-semibold text-blue-800 dark:text-blue-300 mb-2">Raw Metrics (Partial View)</h4>
-        <pre className="bg-gray-100 dark:bg-gray-800 p-4 rounded-md text-sm overflow-auto max-h-60 text-gray-800 dark:text-gray-200">
-          {JSON.stringify(sessionMetrics, null, 2)}
-        </pre>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     )
   }

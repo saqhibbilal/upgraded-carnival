@@ -65,9 +65,17 @@ export function InterviewDetailsModal({
     return "destructive"
   }
 
-  // Helper function to safely render text content
+  // Helper function to safely render text content with improved formatting
   const safeRenderText = (content: any): string => {
-    if (typeof content === 'string') return content
+    if (typeof content === 'string') {
+      // Clean up text formatting - remove excessive asterisks and improve readability
+      return content
+        .replace(/\*{2,}/g, '') // Remove multiple asterisks
+        .replace(/\*([^*]+)\*/g, '$1') // Remove single asterisks around text
+        .replace(/^\s*[-•]\s*/gm, '') // Remove bullet points at start of lines
+        .replace(/\n\s*\n/g, '\n') // Remove excessive line breaks
+        .trim()
+    }
     if (typeof content === 'number') return content.toString()
     if (Array.isArray(content)) return content.join(', ')
     if (content && typeof content === 'object') {
@@ -205,26 +213,26 @@ export function InterviewDetailsModal({
               })()}
 
               {/* Strengths & Weaknesses */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {(() => {
                   const strengths = safeGetArray(evaluationData, 'strengths')
                   return strengths.length > 0 && (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2 text-green-600">
+                    <Card className="border-green-200 bg-green-50/50 dark:bg-green-950/20">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400 text-lg">
                           <CheckCircle className="h-5 w-5" />
                           Strengths
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <ul className="space-y-2">
+                        <div className="space-y-3">
                           {strengths.map((strength: any, index: number) => (
-                            <li key={index} className="flex items-start gap-2">
+                            <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-white dark:bg-gray-800/50 border border-green-100 dark:border-green-800/30">
                               <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
-                              <span className="text-sm">{safeRenderText(strength)}</span>
-                            </li>
+                              <span className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{safeRenderText(strength)}</span>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </CardContent>
                     </Card>
                   )
@@ -233,22 +241,22 @@ export function InterviewDetailsModal({
                 {(() => {
                   const weaknesses = safeGetArray(evaluationData, 'weaknesses')
                   return weaknesses.length > 0 && (
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2 text-red-600">
+                    <Card className="border-orange-200 bg-orange-50/50 dark:bg-orange-950/20">
+                      <CardHeader className="pb-3">
+                        <CardTitle className="flex items-center gap-2 text-orange-700 dark:text-orange-400 text-lg">
                           <XCircle className="h-5 w-5" />
                           Areas for Improvement
                         </CardTitle>
                       </CardHeader>
                       <CardContent>
-                        <ul className="space-y-2">
+                        <div className="space-y-3">
                           {weaknesses.map((weakness: any, index: number) => (
-                            <li key={index} className="flex items-start gap-2">
-                              <XCircle className="h-4 w-4 text-red-600 mt-0.5 flex-shrink-0" />
-                              <span className="text-sm">{safeRenderText(weakness)}</span>
-                            </li>
+                            <div key={index} className="flex items-start gap-3 p-3 rounded-lg bg-white dark:bg-gray-800/50 border border-orange-100 dark:border-orange-800/30">
+                              <XCircle className="h-4 w-4 text-orange-600 mt-0.5 flex-shrink-0" />
+                              <span className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{safeRenderText(weakness)}</span>
+                            </div>
                           ))}
-                        </ul>
+                        </div>
                       </CardContent>
                     </Card>
                   )
@@ -259,22 +267,27 @@ export function InterviewDetailsModal({
               {(() => {
                 const recommendations = safeGetArray(evaluationData, 'recommendations', 'detailedFeedback.recommendations')
                 return recommendations.length > 0 && (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
+                  <Card className="border-blue-200 bg-blue-50/50 dark:bg-blue-950/20">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-blue-700 dark:text-blue-400 text-lg">
                         <TrendingUp className="h-5 w-5" />
                         Recommendations
                       </CardTitle>
+                      <CardDescription className="text-blue-600 dark:text-blue-400">
+                        Personalized suggestions to enhance your technical skills
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <ul className="space-y-2">
+                      <div className="space-y-3">
                         {recommendations.map((rec: any, index: number) => (
-                          <li key={index} className="flex items-start gap-2">
-                            <div className="h-2 w-2 bg-primary rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-sm">{safeRenderText(rec)}</span>
-                          </li>
+                          <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-white dark:bg-gray-800/50 border border-blue-100 dark:border-blue-800/30 shadow-sm">
+                            <div className="flex-shrink-0 w-6 h-6 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mt-0.5">
+                              <span className="text-xs font-semibold text-blue-700 dark:text-blue-300">{index + 1}</span>
+                            </div>
+                            <span className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{safeRenderText(rec)}</span>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     </CardContent>
                   </Card>
                 )
@@ -284,22 +297,27 @@ export function InterviewDetailsModal({
               {(() => {
                 const nextSteps = safeGetArray(evaluationData, 'nextSteps', 'detailedFeedback.nextSteps')
                 return nextSteps.length > 0 && (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
+                  <Card className="border-purple-200 bg-purple-50/50 dark:bg-purple-950/20">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-purple-700 dark:text-purple-400 text-lg">
                         <Clock className="h-5 w-5" />
                         Next Steps
                       </CardTitle>
+                      <CardDescription className="text-purple-600 dark:text-purple-400">
+                        Actionable steps to continue your learning journey
+                      </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <ul className="space-y-2">
+                      <div className="space-y-3">
                         {nextSteps.map((step: any, index: number) => (
-                          <li key={index} className="flex items-start gap-2">
-                            <div className="h-2 w-2 bg-blue-500 rounded-full mt-2 flex-shrink-0" />
-                            <span className="text-sm">{safeRenderText(step)}</span>
-                          </li>
+                          <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-white dark:bg-gray-800/50 border border-purple-100 dark:border-purple-800/30 shadow-sm">
+                            <div className="flex-shrink-0 w-6 h-6 bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center mt-0.5">
+                              <span className="text-xs font-semibold text-purple-700 dark:text-purple-300">{index + 1}</span>
+                            </div>
+                            <span className="text-sm leading-relaxed text-gray-700 dark:text-gray-300">{safeRenderText(step)}</span>
+                          </div>
                         ))}
-                      </ul>
+                      </div>
                     </CardContent>
                   </Card>
                 )
@@ -307,34 +325,52 @@ export function InterviewDetailsModal({
 
               {/* Pro User Specific Metrics */}
               {(evaluationData.technicalAccuracy || evaluationData.practicalKnowledge || evaluationData.communicationClarity) && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
+                <Card className="border-indigo-200 bg-indigo-50/50 dark:bg-indigo-950/20">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-indigo-700 dark:text-indigo-400 text-lg">
                       <Target className="h-5 w-5" />
                       Detailed Assessment
                     </CardTitle>
-                    <CardDescription>
-                      AI-powered evaluation metrics
+                    <CardDescription className="text-indigo-600 dark:text-indigo-400">
+                      AI-powered evaluation metrics for comprehensive analysis
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       {evaluationData.technicalAccuracy && (
-                        <div className="text-center">
-                          <p className="text-sm font-medium text-muted-foreground">Technical Accuracy</p>
-                          <div className="text-2xl font-bold text-blue-600">{evaluationData.technicalAccuracy}/10</div>
+                        <div className="text-center p-4 rounded-lg bg-white dark:bg-gray-800/50 border border-indigo-100 dark:border-indigo-800/30 shadow-sm">
+                          <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Technical Accuracy</p>
+                          <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">{evaluationData.technicalAccuracy}/10</div>
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
+                            <div 
+                              className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
+                              style={{ width: `${(evaluationData.technicalAccuracy / 10) * 100}%` }}
+                            ></div>
+                          </div>
                         </div>
                       )}
                       {evaluationData.practicalKnowledge && (
-                        <div className="text-center">
-                          <p className="text-sm font-medium text-muted-foreground">Practical Knowledge</p>
-                          <div className="text-2xl font-bold text-green-600">{evaluationData.practicalKnowledge}/10</div>
+                        <div className="text-center p-4 rounded-lg bg-white dark:bg-gray-800/50 border border-indigo-100 dark:border-indigo-800/30 shadow-sm">
+                          <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Practical Knowledge</p>
+                          <div className="text-3xl font-bold text-green-600 dark:text-green-400">{evaluationData.practicalKnowledge}/10</div>
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
+                            <div 
+                              className="bg-green-600 h-2 rounded-full transition-all duration-300" 
+                              style={{ width: `${(evaluationData.practicalKnowledge / 10) * 100}%` }}
+                            ></div>
+                          </div>
                         </div>
                       )}
                       {evaluationData.communicationClarity && (
-                        <div className="text-center">
-                          <p className="text-sm font-medium text-muted-foreground">Communication</p>
-                          <div className="text-2xl font-bold text-purple-600">{evaluationData.communicationClarity}/10</div>
+                        <div className="text-center p-4 rounded-lg bg-white dark:bg-gray-800/50 border border-indigo-100 dark:border-indigo-800/30 shadow-sm">
+                          <p className="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">Communication</p>
+                          <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">{evaluationData.communicationClarity}/10</div>
+                          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
+                            <div 
+                              className="bg-purple-600 h-2 rounded-full transition-all duration-300" 
+                              style={{ width: `${(evaluationData.communicationClarity / 10) * 100}%` }}
+                            ></div>
+                          </div>
                         </div>
                       )}
                     </div>

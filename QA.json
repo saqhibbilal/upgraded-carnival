@@ -27424,5 +27424,1475 @@
         "transcription": null
       }
     ]
+  },
+  {
+    "interviewDate": "2025-09-10T21:21:11.804Z",
+    "totalQuestions": 40,
+    "transcripts": [
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": "alcmalcmac,a;c,apca-cpoacpac[a"
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": "cakcmac,aocmomcaoma,c;c"
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": "akanckacoacamcpa;la,c"
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": "cnalcmlamoaconaoca"
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": "calmclamlacamcoa"
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": "alkcmalmcancisdnomama;ca"
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": "kcaclmaocmnovoamcapoa,a"
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": "NADA"
+      },
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": null
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": null
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": null
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": null
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": null
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "complex technical probelm I encountered"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to expalin a technical concept to non technical"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "A tight deadline adn blah blah"
+      },
+      {
+        "qId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "question": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "tId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "transcription": "Nada a"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "challenging technical problem my encounter in my previous world was in the government project that are"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "was during my time at government project"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "transcription": "time time time time time 122445"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "transcription": "no no no absolutely no"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "transcription": "Feroz Khan it was fine it was fine it was fine"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "I will do this and that this and that this and that"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": "Hasta la vista"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "question": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "tId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "question": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "tId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "yes i did"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to explain a tough project to a government official"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "transcription": "yeah very bad very bad very bad"
+      }
+    ]
+  },
+  {
+    "interviewDate": "2025-09-10T21:37:38.535Z",
+    "totalQuestions": 44,
+    "transcripts": [
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": "alcmalcmac,a;c,apca-cpoacpac[a"
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": "cakcmac,aocmomcaoma,c;c"
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": "akanckacoacamcpa;la,c"
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": "cnalcmlamoaconaoca"
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": "calmclamlacamcoa"
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": "alkcmalmcancisdnomama;ca"
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": "kcaclmaocmnovoamcapoa,a"
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": "NADA"
+      },
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": null
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": null
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": null
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": null
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": null
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "complex technical probelm I encountered"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to expalin a technical concept to non technical"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "A tight deadline adn blah blah"
+      },
+      {
+        "qId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "question": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "tId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "transcription": "Nada a"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "challenging technical problem my encounter in my previous world was in the government project that are"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "was during my time at government project"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "transcription": "time time time time time 122445"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "transcription": "no no no absolutely no"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "transcription": "Feroz Khan it was fine it was fine it was fine"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "I will do this and that this and that this and that"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": "Hasta la vista"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "question": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "tId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "question": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "tId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "yes i did"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to explain a tough project to a government official"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "transcription": "yeah very bad very bad very bad"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "A challenging technical problem, with AI project"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "Made sure of using analogies and stuff"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "question": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "tId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "transcription": "Separate must haves and nice to haves"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": "It is a thriving and growing field"
+      }
+    ]
+  },
+  {
+    "interviewDate": "2025-09-10T22:08:45.968Z",
+    "totalQuestions": 48,
+    "transcripts": [
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": "alcmalcmac,a;c,apca-cpoacpac[a"
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": "cakcmac,aocmomcaoma,c;c"
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": "akanckacoacamcpa;la,c"
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": "cnalcmlamoaconaoca"
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": "calmclamlacamcoa"
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": "alkcmalmcancisdnomama;ca"
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": "kcaclmaocmnovoamcapoa,a"
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": "NADA"
+      },
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": null
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": null
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": null
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": null
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": null
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "complex technical probelm I encountered"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to expalin a technical concept to non technical"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "A tight deadline adn blah blah"
+      },
+      {
+        "qId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "question": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "tId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "transcription": "Nada a"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "challenging technical problem my encounter in my previous world was in the government project that are"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "was during my time at government project"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "transcription": "time time time time time 122445"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "transcription": "no no no absolutely no"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "transcription": "Feroz Khan it was fine it was fine it was fine"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "I will do this and that this and that this and that"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": "Hasta la vista"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "question": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "tId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "question": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "tId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "yes i did"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to explain a tough project to a government official"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "transcription": "yeah very bad very bad very bad"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "A challenging technical problem, with AI project"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "Made sure of using analogies and stuff"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "question": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "tId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "transcription": "Separate must haves and nice to haves"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": "It is a thriving and growing field"
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role within the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role within the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role within the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "I can understand what you are saying and yes"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "made aa"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline, but you realize that the requirements are not fully clear. How would you handle this situation?",
+        "question": "Imagine you are assigned to a project with a tight deadline, but you realize that the requirements are not fully clear. How would you handle this situation?",
+        "tId": "Imagine you are assigned to a project with a tight deadline, but you realize that the requirements are not fully clear. How would you handle this situation?",
+        "transcription": "cacalcmlca"
+      },
+      {
+        "qId": "What aspects of our company's culture and values resonate with you the most, and how do you see yourself contributing to our team dynamics?",
+        "question": "What aspects of our company's culture and values resonate with you the most, and how do you see yourself contributing to our team dynamics?",
+        "tId": "What aspects of our company's culture and values resonate with you the most, and how do you see yourself contributing to our team dynamics?",
+        "transcription": "project"
+      }
+    ]
+  },
+  {
+    "interviewDate": "2025-09-10T22:18:23.945Z",
+    "totalQuestions": 52,
+    "transcripts": [
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": "alcmalcmac,a;c,apca-cpoacpac[a"
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": "cakcmac,aocmomcaoma,c;c"
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": "akanckacoacamcpa;la,c"
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": "cnalcmlamoaconaoca"
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": "calmclamlacamcoa"
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": "alkcmalmcancisdnomama;ca"
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": "kcaclmaocmnovoamcapoa,a"
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": "NADA"
+      },
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": null
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": null
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": null
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": null
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": null
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "complex technical probelm I encountered"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to expalin a technical concept to non technical"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "A tight deadline adn blah blah"
+      },
+      {
+        "qId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "question": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "tId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "transcription": "Nada a"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "challenging technical problem my encounter in my previous world was in the government project that are"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "was during my time at government project"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "transcription": "time time time time time 122445"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "transcription": "no no no absolutely no"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "transcription": "Feroz Khan it was fine it was fine it was fine"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "I will do this and that this and that this and that"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": "Hasta la vista"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "question": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "tId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "question": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "tId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "yes i did"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to explain a tough project to a government official"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "transcription": "yeah very bad very bad very bad"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "A challenging technical problem, with AI project"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "Made sure of using analogies and stuff"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "question": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "tId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "transcription": "Separate must haves and nice to haves"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": "It is a thriving and growing field"
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role within the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role within the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role within the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "I can understand what you are saying and yes"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "made aa"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline, but you realize that the requirements are not fully clear. How would you handle this situation?",
+        "question": "Imagine you are assigned to a project with a tight deadline, but you realize that the requirements are not fully clear. How would you handle this situation?",
+        "tId": "Imagine you are assigned to a project with a tight deadline, but you realize that the requirements are not fully clear. How would you handle this situation?",
+        "transcription": "cacalcmlca"
+      },
+      {
+        "qId": "What aspects of our company's culture and values resonate with you the most, and how do you see yourself contributing to our team dynamics?",
+        "question": "What aspects of our company's culture and values resonate with you the most, and how do you see yourself contributing to our team dynamics?",
+        "tId": "What aspects of our company's culture and values resonate with you the most, and how do you see yourself contributing to our team dynamics?",
+        "transcription": "project"
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "a complex technical problem you encountered in your previous role in the media/entertainment industry was for sports company"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "Making use of analogies and examples"
+      },
+      {
+        "qId": "Imagine you are working on a project with a tight deadline, and a critical piece of information from a client is delayed. How would you manage this situation to ensure the project stays on track?",
+        "question": "Imagine you are working on a project with a tight deadline, and a critical piece of information from a client is delayed. How would you manage this situation to ensure the project stays on track?",
+        "tId": "Imagine you are working on a project with a tight deadline, and a critical piece of information from a client is delayed. How would you manage this situation to ensure the project stays on track?",
+        "transcription": "Priortize"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "transcription": "Well aligned as I get a chance to grow and work"
+      }
+    ]
+  },
+  {
+    "interviewDate": "2025-09-10T22:22:35.753Z",
+    "totalQuestions": 56,
+    "transcripts": [
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": "alcmalcmac,a;c,apca-cpoacpac[a"
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": "cakcmac,aocmomcaoma,c;c"
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": "akanckacoacamcpa;la,c"
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": "cnalcmlamoaconaoca"
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": "calmclamlacamcoa"
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": "alkcmalmcancisdnomama;ca"
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": "kcaclmaocmnovoamcapoa,a"
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": "NADA"
+      },
+      {
+        "qId": "Tell me about a time you had to optimize performance. What were the results?",
+        "question": "Tell me about a time you had to optimize performance. What were the results?",
+        "tId": "Tell me about a time you had to optimize performance. What were the results?",
+        "transcription": null
+      },
+      {
+        "qId": "Describe a challenging project where you had to use your React skills.",
+        "question": "Describe a challenging project where you had to use your React skills.",
+        "tId": "Describe a challenging project where you had to use your React skills.",
+        "transcription": null
+      },
+      {
+        "qId": "How do you approach debugging complex Python applications?",
+        "question": "How do you approach debugging complex Python applications?",
+        "tId": "How do you approach debugging complex Python applications?",
+        "transcription": null
+      },
+      {
+        "qId": "What's your experience with deploying applications to Kubernetes?",
+        "question": "What's your experience with deploying applications to Kubernetes?",
+        "tId": "What's your experience with deploying applications to Kubernetes?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you stay updated with the latest AI/ML trends?",
+        "question": "How do you stay updated with the latest AI/ML trends?",
+        "tId": "How do you stay updated with the latest AI/ML trends?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "question": "Tell me about a time you received constructive feedback and how you applied it.",
+        "tId": "Tell me about a time you received constructive feedback and how you applied it.",
+        "transcription": null
+      },
+      {
+        "qId": "What are your long-term career goals?",
+        "question": "What are your long-term career goals?",
+        "tId": "What are your long-term career goals?",
+        "transcription": null
+      },
+      {
+        "qId": "Do you have any questions for me?",
+        "question": "Do you have any questions for me?",
+        "tId": "Do you have any questions for me?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "complex technical probelm I encountered"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to expalin a technical concept to non technical"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "A tight deadline adn blah blah"
+      },
+      {
+        "qId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "question": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "tId": "What aspects of our company culture and values resonate with you, and how do you see yourself contributing to our team dynamics?",
+        "transcription": "Nada a"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "challenging technical problem my encounter in my previous world was in the government project that are"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "was during my time at government project"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "transcription": "time time time time time 122445"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "transcription": "no no no absolutely no"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it and what was the outcome?",
+        "transcription": "Feroz Khan it was fine it was fine it was fine"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are assigned to a project with tight deadlines and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": "I will do this and that this and that this and that"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": "Hasta la vista"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": null
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": null
+      },
+      {
+        "qId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "question": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "tId": "Imagine you are working on a project with a tight deadline, and a key team member suddenly becomes unavailable. How would you handle this situation?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "question": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "tId": "How do you envision your career progressing in the next 3-5 years, and what role do you see this position playing in that progression?",
+        "transcription": null
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry and how you approached solving it?",
+        "transcription": "yes i did"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "a time when I had to explain a tough project to a government official"
+      },
+      {
+        "qId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "question": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "tId": "Imagine you are given a project with a tight deadline and limited resources. How would you prioritize tasks and manage stakeholder expectations?",
+        "transcription": null
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to the growth and success of our media/entertainment team in the next few years?",
+        "transcription": "yeah very bad very bad very bad"
+      },
+      {
+        "qId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a challenging technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "A challenging technical problem, with AI project"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "Made sure of using analogies and stuff"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "question": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "tId": "Imagine you are assigned to a project with a tight deadline and limited resources. How would you prioritize tasks and manage the project to ensure successful delivery?",
+        "transcription": "Separate must haves and nice to haves"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry, and where would you like to see your career progress in the next few years?",
+        "transcription": "It is a thriving and growing field"
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role within the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role within the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role within the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "I can understand what you are saying and yes"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "made aa"
+      },
+      {
+        "qId": "Imagine you are assigned to a project with a tight deadline, but you realize that the requirements are not fully clear. How would you handle this situation?",
+        "question": "Imagine you are assigned to a project with a tight deadline, but you realize that the requirements are not fully clear. How would you handle this situation?",
+        "tId": "Imagine you are assigned to a project with a tight deadline, but you realize that the requirements are not fully clear. How would you handle this situation?",
+        "transcription": "cacalcmlca"
+      },
+      {
+        "qId": "What aspects of our company's culture and values resonate with you the most, and how do you see yourself contributing to our team dynamics?",
+        "question": "What aspects of our company's culture and values resonate with you the most, and how do you see yourself contributing to our team dynamics?",
+        "tId": "What aspects of our company's culture and values resonate with you the most, and how do you see yourself contributing to our team dynamics?",
+        "transcription": "project"
+      },
+      {
+        "qId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "question": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "tId": "Can you describe a complex technical problem you encountered in your previous role in the media/entertainment industry? How did you approach solving it, and what was the outcome?",
+        "transcription": "a complex technical problem you encountered in your previous role in the media/entertainment industry was for sports company"
+      },
+      {
+        "qId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "question": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "tId": "Tell me about a time when you had to explain a technical concept to a non-technical stakeholder. How did you ensure they understood the information?",
+        "transcription": "Making use of analogies and examples"
+      },
+      {
+        "qId": "Imagine you are working on a project with a tight deadline, and a critical piece of information from a client is delayed. How would you manage this situation to ensure the project stays on track?",
+        "question": "Imagine you are working on a project with a tight deadline, and a critical piece of information from a client is delayed. How would you manage this situation to ensure the project stays on track?",
+        "tId": "Imagine you are working on a project with a tight deadline, and a critical piece of information from a client is delayed. How would you manage this situation to ensure the project stays on track?",
+        "transcription": "Priortize"
+      },
+      {
+        "qId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "question": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "tId": "How do you see your technical skills and problem-solving abilities contributing to our team in the media/entertainment industry? Where would you like to see your career progress in the next few years?",
+        "transcription": "Well aligned as I get a chance to grow and work"
+      },
+      {
+        "qId": "Can you describe a time when you had to manage a project with conflicting stakeholder requirements? How did you handle the situation and what was the outcome?",
+        "question": "Can you describe a time when you had to manage a project with conflicting stakeholder requirements? How did you handle the situation and what was the outcome?",
+        "tId": "Can you describe a time when you had to manage a project with conflicting stakeholder requirements? How did you handle the situation and what was the outcome?",
+        "transcription": "time when I had to manage your Complex project was during a government project which was with the government officials"
+      },
+      {
+        "qId": "Tell me about a situation where you had to adapt your communication style to effectively convey complex information to a non-technical audience. What steps did you take and how did you measure the success of your communication?",
+        "question": "Tell me about a situation where you had to adapt your communication style to effectively convey complex information to a non-technical audience. What steps did you take and how did you measure the success of your communication?",
+        "tId": "Tell me about a situation where you had to adapt your communication style to effectively convey complex information to a non-technical audience. What steps did you take and how did you measure the success of your communication?",
+        "transcription": "the time when I had to adapt by communication style to effectively convey Complex information to it cannot technical audience was during AI Summit where I demonstrated application which makes AI more efficient on road level devices"
+      },
+      {
+        "qId": "Imagine you are assigned to a project where the initial scope is unclear and the client is unsure of their exact needs. How would you approach this situation to ensure project success and maintain client satisfaction?",
+        "question": "Imagine you are assigned to a project where the initial scope is unclear and the client is unsure of their exact needs. How would you approach this situation to ensure project success and maintain client satisfaction?",
+        "tId": "Imagine you are assigned to a project where the initial scope is unclear and the client is unsure of their exact needs. How would you approach this situation to ensure project success and maintain client satisfaction?",
+        "transcription": "when the initial scope is until I will help the client understand the exact needs and help them scope out the project needs so that the project is on track and give them some room for improvement and keep our development a child"
+      },
+      {
+        "qId": "How do you see your experience in the education and media/entertainment industries contributing to your long-term career goals, and how does this role fit into that vision?",
+        "question": "How do you see your experience in the education and media/entertainment industries contributing to your long-term career goals, and how does this role fit into that vision?",
+        "tId": "How do you see your experience in the education and media/entertainment industries contributing to your long-term career goals, and how does this role fit into that vision?",
+        "transcription": "Hansi myself growing and leading in this industry"
+      }
+    ]
   }
 ]
