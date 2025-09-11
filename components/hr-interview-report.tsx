@@ -76,6 +76,8 @@ export function HRInterviewReport({
   const [sessionMetrics, setSessionMetrics] = useState<SessionMetrics | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [saving, setSaving] = useState(false)
+  const [saveSuccess, setSaveSuccess] = useState(false)
 
   // Helper calculation functions (moved to top for initialization)
     const calculateStability = (yaw: number[], pitch: number[], roll: number[]): number => {
@@ -368,6 +370,60 @@ export function HRInterviewReport({
 
     void fetchLatestReport();
   }, []);
+
+  // Save HR Report to Profile
+  const saveReportToProfile = async () => {
+    try {
+      setSaving(true)
+      setSaveSuccess(false)
+
+      // Generate a unique session ID
+      const sessionId = `hr_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+
+      // Prepare the data to save
+      const reportData = {
+        sessionId,
+        resumeAnalysis,
+        interviewResponses,
+        hrEvaluation: null, // Will be added in Phase 4
+        behavioralMetrics: sessionMetrics ? {
+          overallScore: processedMetrics?.overallScore || 0,
+          confidenceLevel: processedMetrics?.confidenceLevel || 0,
+          attentionSpan: processedMetrics?.attentionSpan || 0,
+          professionalismScore: processedMetrics?.professionalismScore || 0,
+          avgEyeContact: processedMetrics?.avgEyeContact || 0,
+          stabilityScore: processedMetrics?.stabilityScore || 0,
+          emotionalRange: processedMetrics?.emotionalRange || 0,
+          techQuality: processedMetrics?.techQuality || 0
+        } : null
+      }
+
+      const response = await fetch('/api/hr-reports', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reportData)
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to save report')
+      }
+
+      const result = await response.json()
+      console.log('HR report saved successfully:', result)
+      
+      setSaveSuccess(true)
+      setTimeout(() => setSaveSuccess(false), 3000) // Hide success message after 3 seconds
+
+    } catch (error) {
+      console.error('Error saving HR report:', error)
+      alert(`Failed to save report: ${error instanceof Error ? error.message : 'Unknown error'}`)
+    } finally {
+      setSaving(false)
+    }
+  }
 
   // Phase 5: PDF Download Function
   const downloadReportAsPDF = async () => {
@@ -974,6 +1030,21 @@ export function HRInterviewReport({
         {renderInsights()}
         <div className="flex justify-center gap-4 pt-4 border-t dark:border-slate-600">
           <Button onClick={onStartNewInterview}>Start New Interview</Button>
+          
+          {/* Save to Profile Button */}
+          <Button 
+            onClick={saveReportToProfile}
+            disabled={saving || saveSuccess}
+            variant="outline"
+            className={`${
+              saveSuccess 
+                ? 'bg-green-50 border-green-200 text-green-700 dark:bg-green-900/20 dark:border-green-700 dark:text-green-300' 
+                : 'bg-purple-50 border-purple-200 text-purple-700 hover:bg-purple-100 dark:bg-purple-900/20 dark:border-purple-700 dark:text-purple-300'
+            }`}
+          >
+            {saving ? '💾 Saving...' : saveSuccess ? '✅ Saved!' : '💾 Save to Profile'}
+          </Button>
+          
           {onRefreshResponses && (
             <Button 
               onClick={() => {
