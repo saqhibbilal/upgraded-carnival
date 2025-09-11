@@ -7,11 +7,12 @@ import { HRModeSelection } from "@/components/hr-mode-selection"
 import { HRInterviewPanel } from "@/components/hr-interview-panel"
 import { HRPresenceSidebar } from "@/components/hr-presence-sidebar"
 import { HRInterviewReport } from "@/components/hr-interview-report" // New import
+import { AIModelSelection } from "@/components/ai-model-selection"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import "./hr-interview.css"
 
-type HRInterviewStage = "upload" | "analyzing" | "questions-ready" | "mode-selection" | "interview" | "report"
+type HRInterviewStage = "upload" | "analyzing" | "questions-ready" | "mode-selection" | "ai-model-selection" | "interview" | "report"
 type InterviewMode = "pro" | "video"
 
 interface HRResumeData {
@@ -75,6 +76,7 @@ export default function HRInterviewSimulatorPage() {
   const [hrInterviewQuestions, setHRInterviewQuestions] = useState<HRQuestion[]>([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [interviewMode, setInterviewMode] = useState<InterviewMode>("pro")
+  const [selectedAIModel, setSelectedAIModel] = useState<string>("")
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   
@@ -145,7 +147,30 @@ export default function HRInterviewSimulatorPage() {
     console.log('[Mode Selection] Cleared setup completion flag for new interview');
     
     setInterviewMode(mode)
+    
+    // For Pro mode, show AI model selection first
+    if (mode === "pro") {
+      setHRInterviewStage("ai-model-selection")
+    } else {
+      // For Video mode, go directly to interview
+      setHRInterviewStage("interview")
+    }
+  }
+
+  const handleAIModelSelection = (model: string) => {
+    setSelectedAIModel(model)
+    console.log('[AI Model Selection] Selected model:', model)
     setHRInterviewStage("interview")
+  }
+
+  const handleBackToModeSelection = () => {
+    setHRInterviewStage("mode-selection")
+  }
+
+  const handleAIModelDialogClose = () => {
+    // This handles when the dialog is closed via X button or clicking outside
+    // Go back to mode selection
+    setHRInterviewStage("mode-selection")
   }
 
   const handleHRNextQuestion = () => {
@@ -204,6 +229,7 @@ export default function HRInterviewSimulatorPage() {
     setHRInterviewQuestions([])
     setCurrentQuestionIndex(0)
     setInterviewMode("pro")
+    setSelectedAIModel("")
     setHRInterviewStage("upload")
     setError(null)
     // Reset Phase 4 response tracking
@@ -547,6 +573,15 @@ export default function HRInterviewSimulatorPage() {
 
           {hrInterviewStage === "mode-selection" && <HRModeSelection onModeSelected={handleModeSelection} />}
 
+          {hrInterviewStage === "ai-model-selection" && (
+            <AIModelSelection
+              isOpen={true}
+              onModelSelected={handleAIModelSelection}
+              onClose={handleAIModelDialogClose}
+              onBack={handleBackToModeSelection}
+            />
+          )}
+
           {hrInterviewStage === "interview" && hrInterviewQuestions.length > 0 && (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 h-[calc(100vh-200px)] hr-layout">
               <div className="lg:col-span-1 hr-sidebar">
@@ -563,6 +598,7 @@ export default function HRInterviewSimulatorPage() {
                   onNextQuestion={handleHRNextQuestion}
                   isLastQuestion={currentQuestionIndex === hrInterviewQuestions.length - 1}
                   interviewMode={interviewMode}
+                  //selectedAIModel={selectedAIModel}
                   // Phase 4: Response Tracking Props
                   currentQuestionIndex={currentQuestionIndex}
                   onUpdateResponse={updateResponse}
