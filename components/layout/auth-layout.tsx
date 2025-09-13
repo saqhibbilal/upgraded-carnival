@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import type { ReactNode } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { BookOpen, Code, Home, LogOut, Settings, User, Menu, X } from "lucide-react"
+import { BookOpen, Code, Home, LogOut, Settings, User, Menu, X, MessageSquare, Users } from "lucide-react"
 import { useState, useEffect } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -84,7 +84,7 @@ useEffect(() => {
         {/* Sidebar Header */}
         <div className="flex h-14 items-center border-b px-4">
           <Link href="/dashboard" className="flex items-center">
-            <span className="font-bold text-primary">SDE Hire</span>
+            <span className="font-bold"><span className="text-blue-600">Upady</span><span className="text-yellow-500">ai</span></span>
           </Link>
           <Button variant="ghost" size="icon" className="ml-auto" onClick={() => setSidebarOpen(false)}>
             <X className="h-4 w-4" />
@@ -130,6 +130,30 @@ useEffect(() => {
           </Button>
 
           <Button
+            variant={isActive("/technical-interview") ? "default" : "ghost"}
+            size="sm"
+            className="w-full justify-start"
+            asChild
+          >
+            <Link href="/technical-interview" className="flex items-center gap-2">
+              <MessageSquare className="h-4 w-4" />
+              <span>Technical Interview</span>
+            </Link>
+          </Button>
+
+          <Button
+            variant={isActive("/hr-interview") ? "default" : "ghost"}
+            size="sm"
+            className="w-full justify-start"
+            asChild
+          >
+            <Link href="/hr-interview" className="flex items-center gap-2">
+              <Users className="h-4 w-4" />
+              <span>HR Interview</span>
+            </Link>
+          </Button>
+
+          <Button
             variant={isActive("/profile") ? "default" : "ghost"}
             size="sm"
             className="w-full justify-start md:hidden"
@@ -141,7 +165,8 @@ useEffect(() => {
             </Link>
           </Button>
 
-          <Button
+          {/* Settings page temporarily hidden - keeping code for future use */}
+          {/* <Button
             variant={isActive("/settings") ? "default" : "ghost"}
             size="sm"
             className="w-full justify-start md:hidden"
@@ -151,7 +176,7 @@ useEffect(() => {
               <Settings className="h-4 w-4" />
               <span>Settings</span>
             </Link>
-          </Button>
+          </Button> */}
         </nav>
 
         {/* Sidebar Footer */}
@@ -191,12 +216,13 @@ useEffect(() => {
                       Profile
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
+                  {/* Settings page temporarily hidden - keeping code for future use */}
+                  {/* <DropdownMenuItem asChild>
                     <Link href="/settings" className="flex items-center gap-2 cursor-pointer">
                       <Settings className="h-4 w-4" />
                       Settings
                     </Link>
-                  </DropdownMenuItem>
+                  </DropdownMenuItem> */}
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     className="flex items-center gap-2 cursor-pointer text-red-500"
@@ -217,7 +243,7 @@ useEffect(() => {
         {/* Footer */}
         <footer className="border-t py-4 px-6 bg-background">
           <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div className="text-sm text-muted-foreground mb-2 md:mb-0">© 2023 SDE Hire. All rights reserved.</div>
+            <div className="text-sm text-muted-foreground mb-2 md:mb-0">© 2023 Upadyai. All rights reserved.</div>
             <div className="flex space-x-4">
               <Link href="/terms" className="text-sm text-muted-foreground hover:text-foreground">
                 Terms of Service
