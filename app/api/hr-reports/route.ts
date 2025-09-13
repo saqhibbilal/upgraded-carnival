@@ -33,6 +33,28 @@ export async function POST(request: NextRequest) {
       behavioralMetrics 
     } = body
 
+    // Debug: Log the received data
+    console.log('📊 HR Reports API - Received data:', {
+      sessionId: !!sessionId,
+      resumeAnalysis: !!resumeAnalysis,
+      interviewResponses: interviewResponses ? interviewResponses.length : 0,
+      hrEvaluation: !!hrEvaluation,
+      behavioralMetrics: !!behavioralMetrics
+    })
+
+    if (hrEvaluation) {
+      console.log('✅ HR Evaluation data received:', {
+        overallScore: hrEvaluation.overallScore,
+        hasStrengths: !!hrEvaluation.strengths,
+        hasQuestionEvaluations: !!hrEvaluation.questionEvaluations,
+        evaluationType: typeof hrEvaluation,
+        evaluationKeys: Object.keys(hrEvaluation)
+      })
+    } else {
+      console.log('⚠️ No HR evaluation data received')
+      console.log('🔍 Raw body hrEvaluation field:', body.hrEvaluation)
+    }
+
     // Validate required fields
     if (!sessionId) {
       return NextResponse.json({ error: 'Session ID is required' }, { status: 400 })

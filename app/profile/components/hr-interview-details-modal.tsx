@@ -248,24 +248,145 @@ export function HRInterviewDetailsModal({
             </Card>
           )}
 
-          {/* HR Evaluation (Future Phase 4) */}
+          {/* HR Evaluation */}
           {report.hr_evaluation && (
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Award className="h-5 w-5" />
-                  HR Evaluation
+                  HR Q&A Evaluation
                 </CardTitle>
                 <CardDescription>
                   AI evaluation of your interview responses
                 </CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="text-center py-8 text-muted-foreground">
-                  <Award className="h-12 w-12 mx-auto mb-4 opacity-20" />
-                  <p>HR Q&A Evaluation coming in Phase 4</p>
-                  <p className="text-sm">This will include detailed analysis of your responses</p>
+              <CardContent className="space-y-6">
+                {/* Overall Score */}
+                <div className="text-center">
+                  <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 text-white text-2xl font-bold mb-4">
+                    {report.hr_evaluation.overallScore?.toFixed(1) || 'N/A'}
+                  </div>
+                  <p className="text-lg font-semibold text-gray-800 dark:text-gray-200">
+                    Overall Performance Score
+                  </p>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
+                    {report.hr_evaluation.overallFeedback || 'No feedback available'}
+                  </p>
                 </div>
+
+                {/* Strengths and Areas for Improvement */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-green-700 dark:text-green-400 text-lg">
+                      Strengths Identified
+                    </h4>
+                    <ul className="space-y-2">
+                      {report.hr_evaluation.strengths?.map((strength: string, index: number) => (
+                        <li key={index} className="flex items-start text-sm text-gray-700 dark:text-gray-200">
+                          <span className="text-green-500 mr-2">✓</span>
+                          {strength}
+                        </li>
+                      )) || <li className="text-sm text-gray-500 dark:text-gray-400">No specific strengths identified</li>}
+                    </ul>
+                  </div>
+                  <div className="space-y-3">
+                    <h4 className="font-semibold text-amber-700 dark:text-amber-400 text-lg">
+                      Areas for Improvement
+                    </h4>
+                    <ul className="space-y-2">
+                      {report.hr_evaluation.areasForImprovement?.map((area: string, index: number) => (
+                        <li key={index} className="flex items-start text-sm text-gray-700 dark:text-gray-200">
+                          <span className="text-amber-500 mr-2">•</span>
+                          {area}
+                        </li>
+                      )) || <li className="text-sm text-gray-500 dark:text-gray-400">No specific areas identified</li>}
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Individual Question Evaluations */}
+                {report.hr_evaluation.questionEvaluations && report.hr_evaluation.questionEvaluations.length > 0 && (
+                  <div className="space-y-4">
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-lg">
+                      Question-by-Question Analysis
+                    </h4>
+                    <div className="space-y-4">
+                      {report.hr_evaluation.questionEvaluations.map((qEval: any, index: number) => (
+                        <div key={index} className="border border-gray-200 dark:border-slate-600 rounded-lg p-4">
+                          <div className="flex justify-between items-start mb-3">
+                            <div>
+                              <h5 className="font-medium text-gray-800 dark:text-gray-200">
+                                Question {qEval.questionNumber}
+                              </h5>
+                              <p className="text-sm text-gray-600 dark:text-gray-400">
+                                {qEval.questionType} • {qEval.questionTopic}
+                              </p>
+                            </div>
+                            <div className="text-right">
+                              <div className="text-lg font-bold text-blue-600 dark:text-blue-400">
+                                {qEval.score?.toFixed(1) || 'N/A'}/10
+                              </div>
+                            </div>
+                          </div>
+                          <p className="text-sm text-gray-700 dark:text-gray-200 mb-3">
+                            {qEval.feedback || 'No specific feedback available'}
+                          </p>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                            {qEval.strengths && qEval.strengths.length > 0 && (
+                              <div>
+                                <span className="font-medium text-green-700 dark:text-green-400">Strengths:</span>
+                                <ul className="mt-1">
+                                  {qEval.strengths.map((strength: string, sIndex: number) => (
+                                    <li key={sIndex} className="text-green-600 dark:text-green-300">• {strength}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                            {qEval.improvements && qEval.improvements.length > 0 && (
+                              <div>
+                                <span className="font-medium text-amber-700 dark:text-amber-400">Improvements:</span>
+                                <ul className="mt-1">
+                                  {qEval.improvements.map((improvement: string, iIndex: number) => (
+                                    <li key={iIndex} className="text-amber-600 dark:text-amber-300">• {improvement}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Recommendations */}
+                {report.hr_evaluation.recommendations && (
+                  <div className="bg-gray-50 dark:bg-slate-700 rounded-lg p-4">
+                    <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-lg mb-3">
+                      Recommendations
+                    </h4>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                      <div>
+                        <span className="font-medium text-gray-700 dark:text-gray-300">Hire Recommendation:</span>
+                        <p className="text-gray-600 dark:text-gray-400 mt-1">
+                          {report.hr_evaluation.recommendations.hireRecommendation || 'Not specified'}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="font-medium text-gray-700 dark:text-gray-300">Confidence Level:</span>
+                        <p className="text-gray-600 dark:text-gray-400 mt-1">
+                          {report.hr_evaluation.recommendations.confidence || 'Not specified'}
+                        </p>
+                      </div>
+                      <div className="md:col-span-1">
+                        <span className="font-medium text-gray-700 dark:text-gray-300">Next Steps:</span>
+                        <p className="text-gray-600 dark:text-gray-400 mt-1">
+                          {report.hr_evaluation.recommendations.nextSteps || 'No specific next steps'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
           )}

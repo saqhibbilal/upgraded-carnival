@@ -19,6 +19,7 @@ interface HRResumeData {
   summary: string
   skills: string[]
   experience: string[]
+  hrEvaluation?: any | null
 }
 
 interface HRResumeAnalysis {
@@ -87,6 +88,8 @@ export default function HRInterviewSimulatorPage() {
     lastSaved: null,
     saveError: null
   })
+  // Phase 4: HR Evaluation state
+  const [hrEvaluation, setHrEvaluation] = useState<any>(null)
 
   const handleHRResumeUpload = async (file: File) => {
     try {
@@ -173,7 +176,7 @@ export default function HRInterviewSimulatorPage() {
     setHRInterviewStage("mode-selection")
   }
 
-  const handleHRNextQuestion = () => {
+  const handleHRNextQuestion = async () => {
     if (currentQuestionIndex < hrInterviewQuestions.length - 1) {
       // Save current response before moving to next question
       const currentResponse = interviewResponses[currentQuestionIndex];
@@ -193,8 +196,8 @@ export default function HRInterviewSimulatorPage() {
         console.log(`[Question Navigation] Moving to Q${nextIndex + 1}, has existing response:`, nextResponse?.hasResponse);
       }
     } else {
-      // Final question - ensure all responses are saved
-      console.log('[Question Navigation] Final question reached, preparing for report');
+      // Final question - generate HR evaluation and prepare report
+      console.log('[Question Navigation] Final question reached, generating HR evaluation...');
       
       // Show summary of all responses
       const answeredCount = interviewResponses.filter(r => r.hasResponse).length;
@@ -204,7 +207,45 @@ export default function HRInterviewSimulatorPage() {
       // Save to localStorage
       localStorage.setItem('hr_interview_responses', JSON.stringify(interviewResponses));
       
-      // Generate final report
+      // Generate HR evaluation immediately after interview completion
+      let hrEvaluation = null;
+      if (interviewResponses && interviewResponses.length > 0 && hrResumeAnalysis) {
+        try {
+          console.log('🔍 Generating HR Q&A evaluation after interview completion...');
+          const evaluationResponse = await fetch('/api/hr-evaluation', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              interviewResponses,
+              resumeAnalysis: hrResumeAnalysis,
+              sessionId: `hr_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+            })
+          });
+
+          if (evaluationResponse.ok) {
+            const evaluationResult = await evaluationResponse.json();
+            hrEvaluation = evaluationResult.evaluation;
+            console.log('✅ HR Q&A evaluation completed after interview:', hrEvaluation);
+          } else {
+            console.warn('⚠️ HR evaluation failed, proceeding without it');
+          }
+        } catch (evaluationError) {
+          console.error('Error generating HR evaluation after interview:', evaluationError);
+          // Continue without evaluation - don't fail the entire process
+        }
+      }
+      
+      // Store the evaluation in separate state to pass to report component
+      setHrEvaluation(hrEvaluation);
+      console.log('📊 Storing HR evaluation in separate state:', {
+        hasEvaluation: !!hrEvaluation,
+        evaluationScore: hrEvaluation?.overallScore,
+        evaluationType: typeof hrEvaluation
+      });
+      
+      // Generate final report with evaluation data
       setHRInterviewStage("report")
     }
   }
@@ -232,13 +273,14 @@ export default function HRInterviewSimulatorPage() {
     setSelectedAIModel("")
     setHRInterviewStage("upload")
     setError(null)
-    // Reset Phase 4 response tracking
+    // Reset Phase 4 response tracking and evaluation
     setInterviewResponses([])
     setResponseStatus({
       isSaving: false,
       lastSaved: null,
       saveError: null
     })
+    setHrEvaluation(null) // Reset evaluation state
   }
 
   // Phase 4: Response Tracking Functions
@@ -639,6 +681,7 @@ export default function HRInterviewSimulatorPage() {
                   resumeAnalysis={hrResumeAnalysis}
                   interviewResponses={interviewResponses}
                   onRefreshResponses={refreshResponsesFromStorage}
+                  hrEvaluation={hrEvaluation}
                 />
             </div>
             )
